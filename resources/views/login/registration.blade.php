@@ -23,24 +23,39 @@
                 </div>
               </div>
               <form class="pt-3">
+
+                <div class="form-group">
+                  <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="FirstName">
+                </div>
+                
+                <div class="form-group">
+                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="LastName">
+                </div>
+                
                 <div class="form-group">
                   <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
                 </div>
+
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                 </div>
-                <div class="mt-3 text-center">
-                <a href="{{ route('dashboard') }}" class="btn btn-block btn-facebook auth-form-btn center">
-                  <i class="fa fa-facebook"></i> SIGN IN
-                </a>
 
+                <div class="form-group">
+                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="ConfirmPassword">
                 </div>
+
+                <div class="mt-3 text-center">
+                    <a href="{{ route('dashboard') }}" class="btn btn-block btn-facebook auth-form-btn center">
+                    <i class="fa fa-facebook"></i> SIGN UP
+                    </a>
+                </div>
+
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
                   </div>
                 </div>
                 <div class="text-center mt-4 fw-light">
-                  Don't have an account? <a href="{{ route('registration') }}" class="text-primary">Create</a>
+                   Already have an account? <a href="{{ route('login') }}" class="text-primary">Login</a>
                 </div>
               </form>
             </div>

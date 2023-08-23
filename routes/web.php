@@ -15,7 +15,8 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::controller(LoginController::class)->group(function () {
-    Route::get('/', 'index');
+    Route::get('/', 'index')->name('login');
+    Route::get('/registration', 'registration')->name('registration');
 });
 
 Route::controller(DashboardController::class)->group(function (){
