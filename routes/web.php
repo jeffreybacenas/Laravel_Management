@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BooksController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,5 +22,9 @@ Route::controller(LoginController::class)->group(function () {
 
 Route::controller(DashboardController::class)->group(function (){
     Route::get('/dashboard', 'index')->name('dashboard');
+});
+
+Route::controller(BooksController::class)->group(function (){
+    Route::get('/books', 'index')->name('books');
 });
 
