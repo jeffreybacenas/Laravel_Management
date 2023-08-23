@@ -346,8 +346,15 @@
 
           <li class="nav-item">
             <a class="nav-link" href="{{ route('books') }}">
-              <i class="mdi mdi mdi-archive menu-icon"></i>
+              <i class="mdi mdi-archive menu-icon"></i>
               <span class="menu-title">Books</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('category') }}">
+              <i class="mdi mdi-animation menu-icon"></i>
+              <span class="menu-title">Category</span>
             </a>
           </li>
 

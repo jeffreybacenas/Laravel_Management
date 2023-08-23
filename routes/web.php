@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,3 +29,6 @@ Route::controller(BooksController::class)->group(function (){
     Route::get('/books', 'index')->name('books');
 });
 
+Route::controller(CategoryController::class)->group(function (){
+    Route::get('/category', 'index')->name('category');
+});
