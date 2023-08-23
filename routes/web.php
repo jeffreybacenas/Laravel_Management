@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/', 'index');
 });
 
-Route::get('/login', function () {
-    return view('login/login');
+Route::controller(DashboardController::class)->group(function (){
+    Route::get('/dashboard', 'index')->name('dashboard');
 });
+

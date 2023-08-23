@@ -6,13 +6,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Library Software Login</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="../../vendors/feather/feather.css">
-  <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
-  <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
-  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
   <!-- endinject -->
 </head>
@@ -26,7 +19,7 @@
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
               <div class="text-center mt-5 fw-light ">
-                  <h3 class="">Library Software Login</h3> 
+                  <h3 class="text-primary">Library Software Login</h3> 
                 </div>
               </div>
               <form class="pt-3">
@@ -37,19 +30,14 @@
                   <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="mt-3 text-center">
-                  <button type="button" class="btn btn-block btn-facebook auth-form-btn center">
-                    </i>SIGN IN
-                  </button>
+                <a href="{{ route('dashboard') }}" class="btn btn-block btn-facebook auth-form-btn center">
+                  <i class="fa fa-facebook"></i> SIGN IN
+                </a>
+
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
                   </div>
-                  <!-- <a href="#" class="auth-link text-black">Forgot password?</a> -->
-                </div>
-                <div class="mb-2 text-center">
-                  <button type="button" class="btn btn-block btn-facebook auth-form-btn">
-                    <i class="ti-facebook me-2"></i>Connect using facebook
-                  </button>
                 </div>
                 <div class="text-center mt-4 fw-light">
                   Don't have an account? <a href="register.html" class="text-primary">Create</a>
@@ -65,17 +53,6 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="../../vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-  <!-- End plugin js for this page -->
-  <!-- inject:js -->
-  <script src="../../js/off-canvas.js"></script>
-  <script src="../../js/hoverable-collapse.js"></script>
-  <script src="../../js/template.js"></script>
-  <script src="../../js/settings.js"></script>
-  <script src="../../js/todolist.js"></script>
   <!-- endinject -->
 </body>
 
