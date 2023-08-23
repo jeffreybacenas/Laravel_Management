@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,4 +32,8 @@ Route::controller(BooksController::class)->group(function (){
 
 Route::controller(CategoryController::class)->group(function (){
     Route::get('/category', 'index')->name('category');
+});
+
+Route::controller(UserController::class)->group(function (){
+    Route::get('/usermanagement', 'index')->name('usermanagement');
 });

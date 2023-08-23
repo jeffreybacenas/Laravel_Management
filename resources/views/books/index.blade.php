@@ -358,6 +358,13 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('usermanagement') }}">
+              <i class="mdi mdi-account-settings menu-icon"></i>
+              <span class="menu-title">User Management</span>
+            </a>
+          </li>
+
           <li class="nav-item nav-category">UI Elements</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
