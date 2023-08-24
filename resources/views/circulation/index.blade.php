@@ -332,12 +332,9 @@
           <!-- chat tab ends -->
         </div>
       </div>
-      <!-- partial -->
-      <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+       <!-- partial -->
        @include('partials._sidebar')
-      </nav>
-      <!-- partial -->
+       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
