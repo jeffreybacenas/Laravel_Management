@@ -10,29 +10,19 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Striped Table</h4>
-                  <p class="card-description">
-                    Add class <code>.table-striped</code>
-                  </p>
+                <div class="card-body d-flex justify-content-between">
+        <h4 class="card-title">Books Table</h4>
+        <button class="btn btn-primary">Add</button>
+    </div>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th>
-                            User
-                          </th>
-                          <th>
-                            First name
-                          </th>
-                          <th>
-                            Progress
-                          </th>
-                          <th>
-                            Amount
-                          </th>
-                          <th>
-                            Deadline
-                          </th>
+                          <th>Image Book</th>
+                          <th>Title</th>
+                          <th>Description</th>
+                          <th>Author</th>
+                          <th>Date Publish</th>
                         </tr>
                       </thead>
                       <tbody>
