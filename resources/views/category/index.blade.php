@@ -399,6 +399,13 @@
               <span class="menu-title">User Management</span>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('catalogmanagement') }}">
+              <i class="mdi mdi-application menu-icon"></i>
+              <span class="menu-title">Catalog Management</span>
+            </a>
+          </li>
           
           <li class="nav-item nav-category">UI Elements</li>
           <li class="nav-item">

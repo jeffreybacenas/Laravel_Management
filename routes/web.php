@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CatalogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,4 +37,8 @@ Route::controller(CategoryController::class)->group(function (){
 
 Route::controller(UserController::class)->group(function (){
     Route::get('/usermanagement', 'index')->name('usermanagement');
+});
+
+Route::controller(CatalogController::class)->group(function (){
+    Route::get('/catalogmanagement', 'index')->name('catalogmanagement');
 });
