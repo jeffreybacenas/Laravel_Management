@@ -7,6 +7,7 @@ use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\CirculationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,4 +42,8 @@ Route::controller(UserController::class)->group(function (){
 
 Route::controller(CatalogController::class)->group(function (){
     Route::get('/catalogmanagement', 'index')->name('catalogmanagement');
+});
+
+Route::controller(CirculationController::class)->group(function (){
+    Route::get('/booksandreturn', 'index')->name('booksandreturn');
 });
