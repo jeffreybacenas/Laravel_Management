@@ -45,5 +45,5 @@ Route::controller(CatalogController::class)->group(function (){
 });
 
 Route::controller(CirculationController::class)->group(function (){
-    Route::get('/booksandreturn', 'index')->name('booksandreturn');
+    Route::get('/bookandreturn', 'index')->name('bookandreturn');
 });
