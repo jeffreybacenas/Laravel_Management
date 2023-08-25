@@ -12,7 +12,7 @@
                 <div class="card-body">
                  <div class="card-body d-flex justify-content-between">
                     <h4 class="card-title">Books Table</h4>
-                    <button class="btn btn-primary">Add Book</button>
+                    <button class="btn btn-primary" id="addBookButton">Add Book</button>
                  </div>
                   <div class="table-responsive">
                     <table class="table table-striped">
@@ -165,9 +165,52 @@
                 </div>
               </div>
             </div>
+            <div class="col-md-12 grid-margin stretch-card" id="BookInfo">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title text-center">Book Information</h4><hr>
+                  <form class="forms-sample">
+
+                    <div class="form-group">
+                        <label for="exampleInputFirstName">Book Title</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Book Title">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="exampleInputFirstName">Book Description</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Book Description">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputFirstName">Book Author</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Book Author">
+                    </div>
+
+                    <div class="form-group">
+                    <label for="dueDate">Date Publish: </label>
+                    <input type="date" class="form-control" id="dueDate">
+                  </div><br>
+
+                    <div class="text-center"> <!-- Added this div with "text-center" class -->
+                      <button type="submit" class="btn btn-primary me-2 w-50">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         @include('partials._footer')
 </body>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var addUserButton = document.getElementById("addBookButton");
+    var userInfoSection = document.getElementById("BookInfo");
+
+    addUserButton.addEventListener("click", function() {
+      userInfoSection.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+</script>
 </html>
