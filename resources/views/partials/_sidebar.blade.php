@@ -10,14 +10,14 @@
 
     <li class="nav-item">
       <a class="nav-link" href="{{ route('books') }}">
-        <i class="mdi mdi-archive menu-icon"></i>
+        <i class="mdi mdi-book menu-icon"></i>
         <span class="menu-title">Books</span>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="{{ route('category') }}">
-        <i class="mdi mdi-animation menu-icon"></i>
+        <i class="mdi mdi-folder menu-icon"></i>
         <span class="menu-title">Category</span>
       </a>
     </li>
@@ -42,5 +42,13 @@
         <span class="menu-title">Books And Returns</span>
       </a>
     </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('magazines') }}">
+        <i class="mdi mdi-newspaper menu-icon"></i>
+        <span class="menu-title">Magazines</span>
+      </a>
+    </li>
+
   </ul>
 </nav>

@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CirculationController;
+use App\Http\Controllers\MagazineController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,4 +47,8 @@ Route::controller(CatalogController::class)->group(function (){
 
 Route::controller(CirculationController::class)->group(function (){
     Route::get('/bookandreturn', 'index')->name('bookandreturn');
+});
+
+Route::controller(MagazineController::class)->group(function (){
+    Route::get('/magazines', 'index')->name('magazines');
 });
