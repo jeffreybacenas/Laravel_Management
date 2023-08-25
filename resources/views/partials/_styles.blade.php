@@ -5,6 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/x-icon" href="icon-library.png">
   <title>Laravel Library Software </title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="vendors/feather/feather.css">
