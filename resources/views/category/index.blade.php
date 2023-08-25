@@ -10,30 +10,19 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  
                  <div class="card-body d-flex justify-content-between">
                    <h4 class="card-title">Category Table</h4>
-                   <button class="btn btn-primary">Add Category</button>
+                   <button class="btn btn-primary" id="addCategoryButton">Add Category</button>
                   </div>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th>
-                            User
-                          </th>
-                          <th>
-                            First name
-                          </th>
-                          <th>
-                            Progress
-                          </th>
-                          <th>
-                            Amount
-                          </th>
-                          <th>
-                            Deadline
-                          </th>
+                          <th>Category ID</th>
+                          <th>Category Name </th>
+                          <th>Category Description </th>
+                          <th>Date Created </th>
+                          <th> Date Updated </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -176,9 +165,42 @@
                 </div>
               </div>
             </div>
+            <div class="col-md-12 grid-margin stretch-card" id="CategoryInfo">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title text-center">Category Information</h4><hr>
+                  <form class="forms-sample">
+
+                    <div class="form-group">
+                        <label for="exampleInputFirstName">Category Name</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Category Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputFirstName">Category Description</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Category Description">
+                    </div><br>
+
+                    <div class="text-center"> <!-- Added this div with "text-center" class -->
+                      <button type="submit" class="btn btn-primary me-2 w-50">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         @include('partials._footer')
 </body>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var addUserButton = document.getElementById("addCategoryButton");
+    var userInfoSection = document.getElementById("CategoryInfo");
+
+    addUserButton.addEventListener("click", function() {
+      userInfoSection.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+</script>
 </html>

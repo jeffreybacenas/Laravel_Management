@@ -177,6 +177,7 @@
                 </div>
               </div>
             </div>
+            
           </div>
         </div>
         @include('partials._footer')
