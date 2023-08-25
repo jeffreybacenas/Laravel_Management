@@ -14,7 +14,9 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-
+  
+</body>
+</html>
   <!-- plugins:js -->
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->

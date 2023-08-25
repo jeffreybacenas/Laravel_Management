@@ -12,7 +12,7 @@
                 <div class="card-body">
                  <div class="card-body d-flex justify-content-between">
                    <h4 class="card-title">Category Table</h4>
-                   <button class="btn btn-primary" id="addCategoryButton">Add Category</button>
+                   <button class="btn btn-primary" id="addButton">Add Category</button>
                   </div>
                   <div class="table-responsive">
                     <table class="table table-striped">
@@ -165,7 +165,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-12 grid-margin stretch-card" id="CategoryInfo">
+            <div class="col-md-12 grid-margin stretch-card" id="Info">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title text-center">Category Information</h4><hr>
@@ -191,16 +191,4 @@
           </div>
         </div>
         @include('partials._footer')
-</body>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var addUserButton = document.getElementById("addCategoryButton");
-    var userInfoSection = document.getElementById("CategoryInfo");
-
-    addUserButton.addEventListener("click", function() {
-      userInfoSection.scrollIntoView({ behavior: "smooth" });
-    });
-  });
-</script>
-</html>
+        @include('partials._script')

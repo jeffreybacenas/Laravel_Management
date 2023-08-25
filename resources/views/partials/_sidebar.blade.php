@@ -25,14 +25,14 @@
     <li class="nav-item">
       <a class="nav-link" href="{{ route('usermanagement') }}">
         <i class="mdi mdi-account-group menu-icon"></i>
-        <span class="menu-title">User Management</span>
+        <span class="menu-title">User</span>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="{{ route('catalogmanagement') }}">
         <i class="mdi mdi-file-cabinet menu-icon"></i>
-        <span class="menu-title">Catalog Management</span>
+        <span class="menu-title">Catalog</span>
       </a>
     </li>
 
