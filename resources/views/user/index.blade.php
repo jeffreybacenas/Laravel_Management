@@ -12,27 +12,17 @@
                 <div class="card-body">
                  <div class="card-body d-flex justify-content-between">
                    <h4 class="card-title">User Table</h4>
-                   <button class="btn btn-primary">Add User</button>
+                   <button class="btn btn-primary" id="addUserButton">Add User</button>
                   </div>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th>
-                            User
-                          </th>
-                          <th>
-                            First name
-                          </th>
-                          <th>
-                            Progress
-                          </th>
-                          <th>
-                            Amount
-                          </th>
-                          <th>
-                            Deadline
-                          </th>
+                          <th> User Image</th>
+                          <th> Full Name </th>
+                          <th> Email </th>
+                          <th> User Type </th>
+                          <th> Date Created </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -175,9 +165,65 @@
                 </div>
               </div>
             </div>
+            <div class="col-md-12 grid-margin stretch-card" id="UserInfo">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title text-center">User Information</h4><hr>
+                  <form class="forms-sample">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col">
+                        <label for="exampleInputFirstName">First Name</label>
+                        <input type="text" class="form-control" id="exampleInputFirstName" placeholder="First Name">
+                      </div>
+                      <div class="col">
+                        <label for="exampleInputMiddleName">Middle Name</label>
+                        <input type="text" class="form-control" id="exampleInputMiddleName" placeholder="Middle Name">
+                      </div>
+                      <div class="col">
+                        <label for="exampleInputLastName">Last Name</label>
+                        <input type="text" class="form-control" id="exampleInputLastName" placeholder="Last Name">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="exampleInputPassword1">Email</label>
+                      <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                     <div class="row">
+                      <div class="col">
+                          <label for="exampleInputFirstName">Password</label>
+                          <input type="text" class="form-control" id="exampleInputFirstName" placeholder="Password">
+                      </div>
+                      <div class="col">
+                          <label for="exampleInputFirstName">Confirm Password</label>
+                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+                      </div>
+                     </div>
+                    </div><br>
+                    <div class="text-center"> <!-- Added this div with "text-center" class -->
+                      <button type="submit" class="btn btn-primary me-2 w-50">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         @include('partials._footer')
 </body>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var addUserButton = document.getElementById("addUserButton");
+  var userInfoSection = document.getElementById("UserInfo");
+
+  addUserButton.addEventListener("click", function() {
+    userInfoSection.scrollIntoView({ behavior: "smooth" });
+  });
+});
+</script>
 
 </html>
