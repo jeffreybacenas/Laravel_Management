@@ -24,24 +24,25 @@
 
     <li class="nav-item">
       <a class="nav-link" href="{{ route('usermanagement') }}">
-        <i class="mdi mdi-account-settings menu-icon"></i>
+        <i class="mdi mdi-account-group menu-icon"></i>
         <span class="menu-title">User Management</span>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="{{ route('catalogmanagement') }}">
-        <i class="mdi mdi-application menu-icon"></i>
+        <i class="mdi mdi-file-cabinet menu-icon"></i>
         <span class="menu-title">Catalog Management</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('bookandreturn') }}">
-        <i class="mdi mdi-airplay menu-icon"></i>
-        <span class="menu-title">Books And Returns</span>
-      </a>
+     <a class="nav-link" href="{{ route('bookandreturn') }}">
+      <i class="mdi mdi-book-open-variant menu-icon"></i>
+      <span class="menu-title">Books And Returns</span>
+     </a>
     </li>
+
 
     <li class="nav-item">
       <a class="nav-link" href="{{ route('magazines') }}">
