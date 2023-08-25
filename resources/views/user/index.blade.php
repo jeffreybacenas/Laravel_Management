@@ -216,14 +216,14 @@
         @include('partials._footer')
 </body>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  var addUserButton = document.getElementById("addUserButton");
-  var userInfoSection = document.getElementById("UserInfo");
+  document.addEventListener("DOMContentLoaded", function() {
+    var addUserButton = document.getElementById("addUserButton");
+    var userInfoSection = document.getElementById("UserInfo");
 
-  addUserButton.addEventListener("click", function() {
-    userInfoSection.scrollIntoView({ behavior: "smooth" });
+    addUserButton.addEventListener("click", function() {
+      userInfoSection.scrollIntoView({ behavior: "smooth" });
+    });
   });
-});
 </script>
 
 </html>
