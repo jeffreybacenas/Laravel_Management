@@ -51,5 +51,12 @@
       </a>
     </li>
 
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('dvd') }}">
+        <i class="mdi mdi-disc menu-icon"></i>
+        <span class="menu-title">DVD</span>
+      </a>
+    </li>
+
   </ul>
 </nav>

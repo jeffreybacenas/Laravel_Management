@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CirculationController;
 use App\Http\Controllers\MagazineController;
+use App\Http\Controllers\DVDController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,4 +52,8 @@ Route::controller(CirculationController::class)->group(function (){
 
 Route::controller(MagazineController::class)->group(function (){
     Route::get('/magazines', 'index')->name('magazines');
+});
+
+Route::controller(DVDController::class)->group(function (){
+    Route::get('/dvd', 'index')->name('dvd');
 });
