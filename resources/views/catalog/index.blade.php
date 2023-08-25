@@ -11,11 +11,16 @@
               <div class="card">
                 <div class="card-body">
                   
-                 <div class="card-body d-flex justify-content-between">
-                  <h4 class="card-title">Catalog Table</h4>
-                  <button class="btn btn-primary">Add Catalog</button>
-                 </div> 
-                 
+                <div class="card-body">
+                  <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="card-title mb-3">Search for what you seek within this library.</h1>
+                    <div class="input-group input-group-sm mb-3">
+                      <input type="text" class="form-control" placeholder="Enter what you seek.">
+                      <button class="btn btn-outline-secondary" type="button">Search</button>
+                    </div>
+                  </div>
+                </div>
+                
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
