@@ -10,7 +10,10 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">User Table</h4>
+                 <div class="card-body d-flex justify-content-between">
+                   <h4 class="card-title">User Table</h4>
+                   <button class="btn btn-primary">Add User</button>
+                  </div>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>

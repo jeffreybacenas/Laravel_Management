@@ -10,10 +10,11 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Books And Returns</h4>
-                  <p class="card-description text-right">
-                    <button>Borrow</button>
-                  </p>
+                  
+                 <div class="card-body d-flex justify-content-between">
+                   <h4 class="card-title">Books And Returns</h4>
+                   <button class="btn btn-primary">Add borrow</button>
+                 </div>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
