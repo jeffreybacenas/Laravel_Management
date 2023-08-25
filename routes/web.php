@@ -39,11 +39,11 @@ Route::controller(CategoryController::class)->group(function (){
 });
 
 Route::controller(UserController::class)->group(function (){
-    Route::get('/usermanagement', 'index')->name('usermanagement');
+    Route::get('/user', 'index')->name('user');
 });
 
 Route::controller(CatalogController::class)->group(function (){
-    Route::get('/catalogmanagement', 'index')->name('catalogmanagement');
+    Route::get('/catalog', 'index')->name('catalog');
 });
 
 Route::controller(CirculationController::class)->group(function (){
