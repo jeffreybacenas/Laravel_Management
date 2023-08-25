@@ -12,18 +12,18 @@
                 <div class="card-body">
                   
                  <div class="card-body d-flex justify-content-between">
-                   <h4 class="card-title">Books And Returns</h4>
-                   <button class="btn btn-primary" id="addBorrowButton">Add borrow</button>
+                   <h4 class="card-title">Magazines</h4>
+                   <button class="btn btn-primary" id="addMagazineButton">Add Magazines</button>
                  </div>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th> Book Title  </th>
-                          <th> Date Barrowed </th>
-                          <th> Status </th>
-                          <th> Borrower </th>
-                          <th> Deadline </th>
+                          <th> Magazine Image </th>
+                          <th> Magazines Name  </th>
+                          <th> Magazines Description </th>
+                          <th> Date Created </th>
+                          <th> Date Updated </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -166,39 +166,23 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-12 grid-margin stretch-card" id="BookReturnInfo">
+            <div class="col-md-12 grid-margin stretch-card" id="MagazineInfo">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title text-center">Books And Returns Information</h4><hr>
+                  <h4 class="card-title text-center">Magazine Information</h4><hr>
                   <form class="forms-sample">
 
-                   <div class="form-group">
-                      <label for="bookSelection">Select a Book: </label>
-                      <select class="form-control" id="bookSelection">
-                       <option value="the-notebook">The Notebook</option>
-                       <option value="the-dog">The Dog</option>
-                       <option value="the-cat">The Cat</option>
-                       <option value="the-egg">The Egg</option>
-                     </select>
-                  </div>
-
                   <div class="form-group">
-                      <label for="bookSelection">Select a User: </label>
-                      <select class="form-control" id="bookSelection">
-                       <option value="the-notebook">The Notebook</option>
-                       <option value="the-dog">The Dog</option>
-                       <option value="the-cat">The Cat</option>
-                       <option value="the-egg">The Egg</option>
-                     </select>
+                        <label for="exampleInputFirstName">Magazine Name</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Magazine Name">
                   </div>
-
                   <div class="form-group">
-                    <label for="dueDate">Due Date:</label>
-                    <input type="date" class="form-control" id="dueDate">
+                        <label for="exampleInputFirstName">Magazine Description</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Magazine Description">
                   </div><br>
 
                     <div class="text-center"> <!-- Added this div with "text-center" class -->
-                      <button type="submit" class="btn btn-primary me-2 w-50">Submit</button>
+                      <button type="submit" class="btn btn-success me-2 w-50">Submit</button>
                     </div>
                   </form>
                 </div>
@@ -211,8 +195,8 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    var addUserButton = document.getElementById("addBorrowButton");
-    var userInfoSection = document.getElementById("BookReturnInfo");
+    var addUserButton = document.getElementById("addMagazineButton");
+    var userInfoSection = document.getElementById("MagazineInfo");
 
     addUserButton.addEventListener("click", function() {
       userInfoSection.scrollIntoView({ behavior: "smooth" });
