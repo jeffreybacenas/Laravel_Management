@@ -13,7 +13,7 @@
                 </div>
               </div>
               <form action="{{ route('registration.store') }}" method="POST" class="pt-3">
-              @csrf
+               @csrf
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" name="fname" placeholder="FirstName">
                 </div>

@@ -50,6 +50,12 @@ class LoginController extends Controller
         $user->role_id = 1;
         $user->password = bcrypt($data['password']);
         $user->save();
+        
+        $credentials = $request->only('email', 'password');
+        
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('/dashboard'); // Change the redirection URL
+        }
 
         return redirect()->route('dashboard')->with('success', 'User created successfully.');
     }
