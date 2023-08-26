@@ -12,30 +12,30 @@
                   <h3 class="text-primary">Library Software Login</h3> 
                 </div>
               </div>
-              <form class="pt-3">
+              <form action="{{ route('registration.store')}}" method="POST" class="pt-3">
 
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="FirstName">
+                  <input type="text" class="form-control form-control-lg" name="fname" placeholder="FirstName">
                 </div>
                 
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="LastName">
+                  <input type="text" class="form-control form-control-lg" name="lname" placeholder="LastName">
                 </div>
                 
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                  <input type="email" class="form-control form-control-lg" name="email" placeholder="email">
                 </div>
 
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" class="form-control form-control-lg" name="password" placeholder="Password">
                 </div>
 
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="ConfirmPassword">
+                  <input type="password" class="form-control form-control-lg" placeholder="ConfirmPassword">
                 </div>
 
                 <div class="mt-3 text-center">
-                    <a href="{{ route('dashboard') }}" class="btn btn-block btn-facebook auth-form-btn center">
+                    <button type="submit" class="btn btn-block btn-facebook auth-form-btn center">
                     <i class="fa fa-facebook"></i> SIGN UP
                     </a>
                 </div>
@@ -56,9 +56,6 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-  <!-- plugins:js -->
-  <!-- endinject -->
-</body>
-
-</html>
+  
+  @include('partials._footer')
+@include('partials._script')

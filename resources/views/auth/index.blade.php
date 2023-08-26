@@ -41,9 +41,5 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-  <!-- plugins:js -->
-  <!-- endinject -->
-</body>
-
-</html>
+@include('partials._footer')
+@include('partials._script')
