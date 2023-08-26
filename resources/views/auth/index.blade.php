@@ -12,17 +12,18 @@
                   <h3 class="text-primary">Library Software Login</h3> 
                 </div>
               </div>
-              <form action="{{ route('dashboard')}}" class="pt-3" method="get" >
+              <form action="{{ route('performLogin')}}" method="POST" class="pt-3" >
+              @csrf
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                  <input type="email" class="form-control form-control-lg" name="email" placeholder="Username">
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" class="form-control form-control-lg" name="password" placeholder="Password">
                 </div>
                 <div class="mt-3 text-center">
                 <button type="submit" class="btn btn-block btn-facebook auth-form-btn center">
                   <i class="fa fa-facebook"></i> SIGN IN
-                </a>
+                </button>
 
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">

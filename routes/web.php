@@ -25,13 +25,19 @@ Route::redirect('/', '/login');
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login');
+    Route::post('/performLogin', 'performLogin')->name('performLogin');
     Route::get('/registration', 'registration')->name('registration');
     Route::post('/registration/store', 'store')->name('registration.store');
 });
 
-Route::controller(DashboardController::class)->group(function (){
-    Route::get('/dashboard', 'index')->name('dashboard');
+Route::middleware('auth')->group(function () {
+
+    Route::controller(DashboardController::class)->group(function (){
+        Route::get('/dashboard', 'index')->name('dashboard');
+    });
+    
 });
+
 
 Route::controller(BooksController::class)->group(function (){
     Route::get('/books', 'index')->name('books');
