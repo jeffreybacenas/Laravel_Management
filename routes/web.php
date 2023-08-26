@@ -10,6 +10,7 @@ use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CirculationController;
 use App\Http\Controllers\MagazineController;
 use App\Http\Controllers\DVDController;
+use App\Http\Controllers\SystemLogsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,4 +57,8 @@ Route::controller(MagazineController::class)->group(function (){
 
 Route::controller(DVDController::class)->group(function (){
     Route::get('/dvd', 'index')->name('dvd');
+});
+
+Route::controller(SystemLogsController::class)->group(function (){
+    Route::get('/systemlogs', 'index')->name('systemlogs');
 });
