@@ -21,13 +21,13 @@ use App\Http\Controllers\SystemLogsController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::redirect('/', '/login');
 
-Route::group(['prefix' => 'login'], function () {
-    Route::get('/', 'LoginController@index')->name('login');
-    Route::get('/registration', 'LoginController@registration')->name('registration');
-    Route::post('/registration/store', 'LoginController@store')->name('registration.store');
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'index')->name('login');
+    Route::get('/registration', 'registration')->name('registration');
+    Route::post('/registration/store', 'store')->name('registration.store');
 });
-
 
 Route::controller(DashboardController::class)->group(function (){
     Route::get('/dashboard', 'index')->name('dashboard');

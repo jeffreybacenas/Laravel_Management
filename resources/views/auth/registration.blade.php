@@ -12,8 +12,8 @@
                   <h3 class="text-primary">Library Software Login</h3> 
                 </div>
               </div>
-              <form action="{{ route('registration.store')}}" method="POST" class="pt-3">
-
+              <form action="{{ route('registration.store') }}" method="POST" class="pt-3">
+              @csrf
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" name="fname" placeholder="FirstName">
                 </div>
@@ -37,7 +37,7 @@
                 <div class="mt-3 text-center">
                     <button type="submit" class="btn btn-block btn-facebook auth-form-btn center">
                     <i class="fa fa-facebook"></i> SIGN UP
-                    </a>
+                    </button>
                 </div>
 
                 <div class="my-2 d-flex justify-content-between align-items-center">

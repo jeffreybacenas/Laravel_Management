@@ -19,7 +19,6 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
-        dd("hi jeff");
         $data = $request->validate([
             'fname' => 'required',
             'lname' => 'required',
@@ -33,7 +32,7 @@ class LoginController extends Controller
         $user->role = 1;
         $user->password = bcrypt($data['password']);
         $user->save();
-
+        dd('jeff');
         return redirect()->route('dashboard')->with('success', 'User created successfully.');
     }
 }
