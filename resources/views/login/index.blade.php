@@ -12,7 +12,7 @@
                   <h3 class="text-primary">Library Software Login</h3> 
                 </div>
               </div>
-              <form class="pt-3">
+              <form action="{{ route('dashboard')}}" class="pt-3" method="get" >
                 <div class="form-group">
                   <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
                 </div>
@@ -20,7 +20,7 @@
                   <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="mt-3 text-center">
-                <a href="{{ route('dashboard') }}" class="btn btn-block btn-facebook auth-form-btn center">
+                <button type="submit" class="btn btn-block btn-facebook auth-form-btn center">
                   <i class="fa fa-facebook"></i> SIGN IN
                 </a>
 
