@@ -17,7 +17,11 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('author')->nullable();
             $table->date('publishdate')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();
+
+            // Add the foreign key constraint
+            $table->foreign('category_id')->references('id')->on('category');
         });
     }
 
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('books');
     }
 };
