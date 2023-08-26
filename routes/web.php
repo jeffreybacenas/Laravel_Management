@@ -25,6 +25,7 @@ use App\Http\Controllers\SystemLogsController;
 Route::controller(LoginController::class)->group(function () {
     Route::get('/', 'index')->name('login');
     Route::get('/registration', 'registration')->name('registration');
+    Route::get('/registration/store', 'store')->name('registration.store');
 });
 
 Route::controller(DashboardController::class)->group(function (){

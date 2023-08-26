@@ -15,4 +15,8 @@ class LoginController extends Controller
     {
         return view("login.registration");
     }
+    public function store()
+    {
+        
+    }
 }
