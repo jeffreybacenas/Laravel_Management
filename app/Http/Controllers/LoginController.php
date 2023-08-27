@@ -46,7 +46,7 @@ class LoginController extends Controller
             'fname' => 'required',
             'lname' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:3',
+            'password' => 'required|min:3|confirmed',
         ]);
 
         $user = new User();
@@ -55,8 +55,8 @@ class LoginController extends Controller
         $user->role_id = 1;
         $user->password = bcrypt($data['password']);
         $user->save();
-        
 
+        Session::flash('success', 'User registered successfully');
         return redirect()->route('login');
     }
 }

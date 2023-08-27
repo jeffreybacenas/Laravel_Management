@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" placeholder="ConfirmPassword">
+                  <input type="password" class="form-control form-control-lg" name="password_confirmation" placeholder="ConfirmPassword">
                 </div>
 
                 <div class="mt-3 text-center">
@@ -59,3 +59,19 @@
   
   @include('partials._footer')
 @include('partials._script')
+@if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{ $error }}',
+                toast: true,
+                position: 'top-end', // Position the toast notification at the top-right corner
+                showConfirmButton: false,
+                timer: 5000 // Display for 5 seconds
+            });
+        </script>
+    @endforeach
+@endif
+
+
