@@ -30,10 +30,17 @@
                         @forelse($books as $book)
                         <tr>
                           <td>{{ $book->title }}</td>
-                          <td>{{ $book->description }}</td>
-                          <td>{{ $book->author }}</td>
-                          <td> {{ $book->publishdate }} </td>
-                          <td>May 15, 2015</td>
+                          <td style="color: {{ $book->description ? 'inherit' : 'blue' }};">{{ $book->description ? $book->description : 'N/A' }}</td>
+                          <td style="color: {{ $book->author ? 'inherit' : 'blue' }};">{{ $book->author ? $book->author : 'N/A' }}</td>
+                          <td style="color: {{ $book->publishdate ? 'inherit' : 'blue' }};">{{ $book->publishdate ? \Carbon\Carbon::parse($book->publishdate)->format('M d, Y') : 'N/A' }} </td>
+                          <td>
+                            <a href="" class="btn btn-sm btn-primary">
+                             <i class="mdi mdi-pencil"></i> 
+                            </a>
+                            <a href="" class="btn btn-sm btn-danger">
+                                <i class="mdi mdi-delete"></i> 
+                            </a>
+                          </td>
                         </tr>  
                         @empty
                           <td colspan="5" class="text-center">No records found.</td>
