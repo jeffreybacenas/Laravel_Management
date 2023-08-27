@@ -12,10 +12,15 @@
                 <div class="card-body">
                  <div class="card-body d-flex justify-content-between">
                     <h4 class="card-title">Books Table</h4>
-                    <button class="btn btn-primary" id="addButton">Add Book</button>
+                    <div>
+                      <button class="btn btn-primary rounded-pill px-4 scrollButton">
+                          <i class="mdi mdi-book-plus mr-2"></i> Add Book
+                      </button>
+                    </div>
+
                  </div>
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="booksTable">
                       <thead>
                         <tr>
                           <th>Title</th>
@@ -28,13 +33,13 @@
                       <tbody>
                         <tr>
                         @forelse($books as $book)
-                        <tr>
+                        <tr data-id="{{ $book->id }}">
                           <td>{{ $book->title }}</td>
                           <td style="color: {{ $book->description ? 'inherit' : 'blue' }};">{{ $book->description ? $book->description : 'N/A' }}</td>
                           <td style="color: {{ $book->author ? 'inherit' : 'blue' }};">{{ $book->author ? $book->author : 'N/A' }}</td>
                           <td style="color: {{ $book->publishdate ? 'inherit' : 'blue' }};">{{ $book->publishdate ? \Carbon\Carbon::parse($book->publishdate)->format('M d, Y') : 'N/A' }} </td>
                           <td>
-                            <a href="" class="btn btn-sm btn-primary">
+                            <a class="btn btn-sm btn-primary scrollButton">
                              <i class="mdi mdi-pencil"></i> 
                             </a>
                             <a href="" class="btn btn-sm btn-danger">
@@ -88,5 +93,27 @@
             </div>
           </div>
         </div>
+
         @include('partials._footer')
         @include('partials._script')
+        <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const booksTable = document.getElementById('booksTable');
+        
+        booksTable.addEventListener('click', function (event) {
+            const clickedElement = event.target;
+            const row = clickedElement.closest('tr');
+            
+            if (clickedElement.classList.contains('editButton')) {
+                const bookId = row.getAttribute('data-id');
+                // Handle edit action using bookId
+                console.log('Edit button clicked for book ID:', bookId);
+            } else if (clickedElement.classList.contains('deleteButton')) {
+                const bookId = row.getAttribute('data-id');
+                // Handle delete action using bookId
+                console.log('Delete button clicked for book ID:', bookId);
+            }
+        });
+    });
+</script>
+

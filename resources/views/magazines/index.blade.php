@@ -13,7 +13,7 @@
                   
                  <div class="card-body d-flex justify-content-between">
                    <h4 class="card-title">Magazines</h4>
-                   <button class="btn btn-primary" id="addButton">Add Magazines</button>
+                   <button class="btn btn-primary scrollButton">Add Magazines</button>
                  </div>
                   <div class="table-responsive">
                     <table class="table table-striped">

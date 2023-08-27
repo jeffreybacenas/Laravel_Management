@@ -12,7 +12,7 @@
                 <div class="card-body">
                  <div class="card-body d-flex justify-content-between">
                    <h4 class="card-title">User Table</h4>
-                   <button class="btn btn-primary" id="addButton">Add User</button>
+                   <button class="btn btn-primary scrollButton">Add User</button>
                   </div>
                   <div class="table-responsive">
                     <table class="table table-striped">

@@ -1,10 +1,14 @@
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var addUserButton = document.getElementById("addButton");
-    var userInfoSection = document.getElementById("Info");
+  
+  document.addEventListener("DOMContentLoaded", function () {
+        var editButtons = document.querySelectorAll(".scrollButton");
+        var userInfoSection = document.getElementById("Info");
 
-    addUserButton.addEventListener("click", function() {
-      userInfoSection.scrollIntoView({ behavior: "smooth" });
+        editButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                userInfoSection.scrollIntoView({ behavior: "smooth" });
+            });
+        });
     });
-  });
+
 </script>

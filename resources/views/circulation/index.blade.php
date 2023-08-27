@@ -13,7 +13,7 @@
                   
                  <div class="card-body d-flex justify-content-between">
                    <h4 class="card-title">Books And Returns</h4>
-                   <button class="btn btn-primary" id="addButton">Add borrow</button>
+                   <button class="btn btn-primary scrollButton">Add borrow</button>
                  </div>
                   <div class="table-responsive">
                     <table class="table table-striped">
