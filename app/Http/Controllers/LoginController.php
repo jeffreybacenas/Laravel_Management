@@ -30,7 +30,8 @@ class LoginController extends Controller
             Session::flash('success', 'Welcome ' . $userName->name);
             return redirect()->route('dashboard');
         } else {
-            return redirect()->route('login')->with('error', 'Invalid credentials');
+            Session::flash('error', 'Invalid credentials');
+            return redirect()->route('login');
         }
     }
 

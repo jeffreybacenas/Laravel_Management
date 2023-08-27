@@ -44,11 +44,25 @@
   </div>
 @include('partials._footer')
 @include('partials._script')
+
 @if(session('success'))
     <script>
         Swal.fire({
             icon: 'success',
             title: '{{ session('success') }}',
+            toast: true,
+            position: 'top-end', // Position the toast notification at the top-right corner
+            showConfirmButton: false,
+            timer: 3000 // Display for 3 seconds
+        });
+    </script>
+@endif
+
+@if(Session::has('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: '{{ Session::get('error') }}',
             toast: true,
             position: 'top-end', // Position the toast notification at the top-right corner
             showConfirmButton: false,
