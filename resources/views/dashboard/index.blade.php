@@ -22,21 +22,21 @@
                           
                          <div>
                             <p class="statistics-title">Total Books</p>
-                            <h3 class="rate-percentage">10,000</h3>
+                            <h3 class="rate-percentage">{{ $booksCount }}</h3>
                           </div>
 
                           <div>
-                            <p class="statistics-title">Total User</p>
+                            <p class="statistics-title">Total Magazines</p>
                             <h3 class="rate-percentage">7,682</h3>
                           </div>
 
                           <div>
-                            <p class="statistics-title">Books Category</p>
+                            <p class="statistics-title">Total DVDs</p>
                             <h3 class="rate-percentage">68</h3>
                           </div>
 
                           <div class="d-none d-md-block">
-                            <p class="statistics-title">Total Borrowed </p>
+                            <p class="statistics-title">Total User </p>
                             <h3 class="rate-percentage">200</h3>
                           </div>
 
