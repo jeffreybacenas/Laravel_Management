@@ -67,22 +67,22 @@
 
                     <div class="form-group">
                         <label >Book Title</label>
-                        <input type="text" class="form-control" name="title" placeholder="Book Title">
+                        <input type="text" class="form-control" id="bookTitleInput" name="title" placeholder="Book Title">
                     </div>
                     
                     <div class="form-group">
                         <label >Book Description</label>
-                        <input type="text" class="form-control" name="description" placeholder="Book Description">
+                        <input type="text" class="form-control" id="bookDescInput" name="description" placeholder="Book Description">
                     </div>
 
                     <div class="form-group">
                         <label>Book Author</label>
-                        <input type="text" class="form-control" name="author" placeholder="Book Author">
+                        <input type="text" class="form-control" id="bookAuthorInput" name="author" placeholder="Book Author">
                     </div>
 
                     <div class="form-group">
                     <label >Publish Date: </label>
-                    <input type="date" class="form-control" name="publishDate">
+                    <input type="date" class="form-control" id="bookPubDateInput" name="publishDate">
                   </div><br>
 
                     <div class="text-center"> <!-- Added this div with "text-center" class -->
@@ -98,19 +98,47 @@
         @include('partials._footer')
         <script>
           document.addEventListener('DOMContentLoaded', function () {
-        const booksTable = document.getElementById('booksTable');
+          const booksTable = document.getElementById('booksTable');
 
-        booksTable.addEventListener('click', function (event) {
+          booksTable.addEventListener('click', async function (event) {
             const clickedElement = event.target;
             const row = clickedElement.closest('tr');
+            const bookTitleInput = document.getElementById('bookTitleInput');
+            const bookDescInput = document.getElementById('bookDescInput');
+            const bookAuthorInput = document.getElementById('bookAuthorInput');
+            const bookPubDateInput = document.getElementById('bookPubDateInput');
 
-            if (clickedElement.classList.contains('editButton')) {
-                const bookId = row.getAttribute('data-id');
-                // Handle edit action using bookId
-                console.log('Edit button clicked for book ID:', bookId);
-            } 
-        });
+        if (clickedElement.classList.contains('editButton')) {
+            const bookId = row.getAttribute('data-id');
+            try {
+                const bookData = await fetchBookData(bookId);
+                bookTitleInput.value = bookData.title;
+                bookDescInput.value = bookData.description;
+                bookAuthorInput.value = bookData.author;
+                bookPubDateInput.value = bookData.publishdate;
+                console.log(bookId);
+                // Now you can handle the data received from the backend
+            } catch (error) {
+                console.error('An error occurred:', error);
+            }
+        }
     });
+});
+
+async function fetchBookData(bookId) {
+    try {
+        const response = await fetch(`/books/edit/${bookId}`);
+
+        if (response.ok) {
+            const bookData = await response.json();
+            return bookData;
+        } else {
+            throw new Error('Failed to fetch book data');
+        }
+    } catch (error) {
+        throw error;
+    }
+}
       </script>
         @include('partials._script')
         

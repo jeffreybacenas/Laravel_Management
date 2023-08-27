@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Http\JsonResponse;
 
 class BooksController extends Controller
 {
@@ -27,6 +28,13 @@ class BooksController extends Controller
         $book->save();
         
         return redirect()->route('books');
+    }
+
+    public function edit($id)
+    {
+        $book = Book::findOrFail($id);
+
+        return new JsonResponse($book);
     }
 
 }
