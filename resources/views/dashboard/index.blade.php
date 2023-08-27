@@ -10,24 +10,7 @@
       <div class="main-panel">
         
         <div class="content-wrapper">
-       
-        @if(session('success'))
-    <div class="toast">
-        <div class="toast-header bg-success text-white">
-            Success
-            <button type="button" class="btn-close" data-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            {{ session('success') }}
-        </div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var toast = new bootstrap.Toast(document.querySelector('.toast'));
-            toast.show();
-        });
-    </script>
-@endif
+
           <div class="row">
             <div class="col-sm-12">
               <div class="home-tab">
@@ -138,6 +121,19 @@
         </div>
 
         @include('partials._footer')
+        
+        @if(session('success'))
+          <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('success') }}',
+                toast: true,
+                position: 'top-end', // Position the toast notification at the top-right corner
+                showConfirmButton: false,
+                timer: 3000 // Display for 3 seconds
+            });
+          </script>
+        @endif
 
         
 

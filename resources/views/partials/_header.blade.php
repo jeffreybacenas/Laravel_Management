@@ -9,7 +9,7 @@
         </div>
         <div>
           <a class="navbar-brand brand-logo" href="{{ route('dashboard') }}">
-            <h4>Library Software</h4>
+            <h5>Library Software</h5>
           </a>
           <a class="navbar-brand brand-logo-mini" href="{{ route('dashboard') }}">
           </a>

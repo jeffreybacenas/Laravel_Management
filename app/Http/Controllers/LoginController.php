@@ -24,7 +24,10 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            Session::flash('success', 'User created successfully.');
+
+            $userName = User::where('email', $credentials['email'])->First();
+
+            Session::flash('success', 'Welcome ' . $userName->name);
             return redirect()->route('dashboard');
         } else {
             return redirect()->route('login')->with('error', 'Invalid credentials');

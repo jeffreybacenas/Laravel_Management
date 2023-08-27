@@ -20,6 +20,9 @@
   <link rel="stylesheet" href="js/select.dataTables.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="css/vertical-layout-light/style.css">>
+  <link rel="stylesheet" href="css/vertical-layout-light/style.css">
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+   </style>
 
 </head>
