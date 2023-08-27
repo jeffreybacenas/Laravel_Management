@@ -15,7 +15,15 @@ class BooksController extends Controller
 
     public function store(Request $request)
     {
+        $data = $request->validate([
+            'title' => 'required|unique:books'
+        ]);
+
+        $book = new Book;
+        $book->title = $data['title'];
+        $book->save();
         
+        return redirect()->route('books');
     }
 
 }

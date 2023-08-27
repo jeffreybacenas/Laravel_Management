@@ -47,26 +47,27 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title text-center">Book Information</h4><hr>
-                  <form class="forms-sample">
-
+                  <form action="{{ route ('books.store') }}" method="POST" class="forms-sample">
+                   @csrf
+                   
                     <div class="form-group">
-                        <label for="exampleInputFirstName">Book Title</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Book Title">
+                        <label >Book Title</label>
+                        <input type="text" class="form-control" name="title" placeholder="Book Title">
                     </div>
                     
                     <div class="form-group">
-                        <label for="exampleInputFirstName">Book Description</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Book Description">
+                        <label >Book Description</label>
+                        <input type="text" class="form-control" name="description" placeholder="Book Description">
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleInputFirstName">Book Author</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Book Author">
+                        <label>Book Author</label>
+                        <input type="text" class="form-control" name="author" placeholder="Book Author">
                     </div>
 
                     <div class="form-group">
-                    <label for="dueDate">Date Publish: </label>
-                    <input type="date" class="form-control" id="dueDate">
+                    <label >Date Publish: </label>
+                    <input type="date" class="form-control" name="datePublish">
                   </div><br>
 
                     <div class="text-center"> <!-- Added this div with "text-center" class -->
