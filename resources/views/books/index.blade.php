@@ -20,38 +20,39 @@
 
                  </div>
                   <div class="table-responsive">
+                    
                     <table class="table table-striped" id="booksTable">
-                      <thead>
-                        <tr>
-                          <th>Title</th>
-                          <th>Description</th>
-                          <th>Author</th>
-                          <th>Date Publish</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                        @forelse($books as $book)
-                        <tr data-id="{{ $book->id }}">
-                          <td>{{ $book->title }}</td>
-                          <td style="color: {{ $book->description ? 'inherit' : 'blue' }};">{{ $book->description ? $book->description : 'N/A' }}</td>
-                          <td style="color: {{ $book->author ? 'inherit' : 'blue' }};">{{ $book->author ? $book->author : 'N/A' }}</td>
-                          <td style="color: {{ $book->publishdate ? 'inherit' : 'blue' }};">{{ $book->publishdate ? \Carbon\Carbon::parse($book->publishdate)->format('M d, Y') : 'N/A' }} </td>
-                          <td>
-                            <a class="btn btn-sm btn-primary scrollButton">
-                             <i class="mdi mdi-pencil"></i> 
-                            </a>
-                            <a href="" class="btn btn-sm btn-danger">
-                                <i class="mdi mdi-delete"></i> 
-                            </a>
-                          </td>
-                        </tr>  
-                        @empty
-                          <td colspan="5" class="text-center">No records found.</td>
-                        @endforelse
-                        </tr>
-                      </tbody>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Author</th>
+                                <th>Date Publish</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($books as $book)
+                            <tr data-id="{{ $book->id }}">
+                                <td>{{ $book->title }}</td>
+                                <td style="color: {{ $book->description ? 'inherit' : 'blue' }};">{{ $book->description ? $book->description : 'N/A' }}</td>
+                                <td style="color: {{ $book->author ? 'inherit' : 'blue' }};">{{ $book->author ? $book->author : 'N/A' }}</td>
+                                <td style="color: {{ $book->publishdate ? 'inherit' : 'blue' }};">{{ $book->publishdate ? \Carbon\Carbon::parse($book->publishdate)->format('M d, Y') : 'N/A' }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary scrollButton editButton">
+                                        <i class="mdi mdi-pencil"></i> Edit
+                                    </a>
+                                    <a href="" class="btn btn-sm btn-danger">
+                                        <i class="mdi mdi-delete"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="5" class="text-center">No records found.</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
                     </table>
                   </div>
                 </div>
@@ -95,25 +96,22 @@
         </div>
 
         @include('partials._footer')
-        @include('partials._script')
         <script>
-    document.addEventListener('DOMContentLoaded', function () {
+          document.addEventListener('DOMContentLoaded', function () {
         const booksTable = document.getElementById('booksTable');
-        
+
         booksTable.addEventListener('click', function (event) {
             const clickedElement = event.target;
             const row = clickedElement.closest('tr');
-            
+
             if (clickedElement.classList.contains('editButton')) {
                 const bookId = row.getAttribute('data-id');
                 // Handle edit action using bookId
                 console.log('Edit button clicked for book ID:', bookId);
-            } else if (clickedElement.classList.contains('deleteButton')) {
-                const bookId = row.getAttribute('data-id');
-                // Handle delete action using bookId
-                console.log('Delete button clicked for book ID:', bookId);
-            }
+            } 
         });
     });
-</script>
+      </script>
+        @include('partials._script')
+        
 
