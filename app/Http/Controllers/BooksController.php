@@ -21,6 +21,9 @@ class BooksController extends Controller
 
         $book = new Book;
         $book->title = $data['title'];
+        $book->description = $request->description;
+        $book->author = $request->author;
+        $book->publishdate = $request->publishDate;
         $book->save();
         
         return redirect()->route('books');

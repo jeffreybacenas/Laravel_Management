@@ -28,11 +28,13 @@
                       <tbody>
                         <tr>
                         @forelse($books as $book)
+                        <tr>
                           <td>{{ $book->title }}</td>
-                          <td>Herman Beck</td>
-                          <td>$ 77.99</td>
-                          <td>$ 77.99</td>
+                          <td>{{ $book->description }}</td>
+                          <td>{{ $book->author }}</td>
+                          <td> {{ $book->publishdate }} </td>
                           <td>May 15, 2015</td>
+                        </tr>  
                         @empty
                           <td colspan="5" class="text-center">No records found.</td>
                         @endforelse
@@ -49,7 +51,7 @@
                   <h4 class="card-title text-center">Book Information</h4><hr>
                   <form action="{{ route ('books.store') }}" method="POST" class="forms-sample">
                    @csrf
-                   
+
                     <div class="form-group">
                         <label >Book Title</label>
                         <input type="text" class="form-control" name="title" placeholder="Book Title">
@@ -66,8 +68,8 @@
                     </div>
 
                     <div class="form-group">
-                    <label >Date Publish: </label>
-                    <input type="date" class="form-control" name="datePublish">
+                    <label >Publish Date: </label>
+                    <input type="date" class="form-control" name="publishDate">
                   </div><br>
 
                     <div class="text-center"> <!-- Added this div with "text-center" class -->
