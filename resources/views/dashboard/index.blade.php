@@ -1,15 +1,36 @@
 @include('partials._styles')
 <body>
+
+
   <!-- <div class="container-scroller"> -->
       @include('partials._header')
       @include('partials._sidebar')
+     
         <!-- partial -->
       <div class="main-panel">
+        
         <div class="content-wrapper">
+       
+        @if(session('success'))
+    <div class="toast">
+        <div class="toast-header bg-success text-white">
+            Success
+            <button type="button" class="btn-close" data-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{ session('success') }}
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var toast = new bootstrap.Toast(document.querySelector('.toast'));
+            toast.show();
+        });
+    </script>
+@endif
           <div class="row">
             <div class="col-sm-12">
               <div class="home-tab">
-                
                 <div class="tab-content tab-content-basic">
                   <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
                     <div class="row">
@@ -115,5 +136,8 @@
             </div>
           </div>
         </div>
+
         @include('partials._footer')
+
+        
 
