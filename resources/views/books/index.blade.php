@@ -20,18 +20,22 @@
 
                  </div>
                   <div class="table-responsive">
-                  <div class="rows-per-page">
+                  <div class="table-controls d-flex justify-content-between mb-3">
+    <div class="rows-per-page">
         <label for="rowsPerPage" class="mr-2">Rows per page:</label>
         <select id="rowsPerPage" class="form-control form-control-sm">
             <option value="10">10</option>
             <option value="50">50</option>
             <option value="100">100</option>
         </select>
-    </div>  
-                    <div class="search-container">
-                      <label for="searchInput" class="search-label">Search:</label>
-                      <input type="text" id="searchInput" class="form-control search-input">
-                    </div>
+    </div>
+    
+    <div class="search-container ml-auto"> <!-- Add ml-auto to align to the right -->
+        <label for="searchInput" class="search-label">Search:</label>
+        <input type="text" id="searchInput" class="form-control form-control-sm search-input">
+    </div>
+</div>
+
                     <table class="table table-striped" id="booksTable">
                         <thead>
                             <tr>
