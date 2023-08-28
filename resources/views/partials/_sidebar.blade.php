@@ -59,11 +59,20 @@
     </li>
 
     <li class="nav-item">
+      <a class="nav-link" href="{{ route('reports') }}">
+        <i class="mdi mdi-analytics menu-icon"></i>
+        <span class="menu-title">Reports</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
       <a class="nav-link" href="{{ route('systemlogs') }}">
         <i class="mdi mdi-file-document-box-outline menu-icon"></i>
         <span class="menu-title">System Logs</span>
       </a>
     </li>
+
+
 
   </ul>
 </nav>

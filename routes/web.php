@@ -11,6 +11,7 @@ use App\Http\Controllers\CirculationController;
 use App\Http\Controllers\MagazineController;
 use App\Http\Controllers\DVDController;
 use App\Http\Controllers\SystemLogsController;
+use App\Http\Controllers\ReportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,6 +70,10 @@ Route::middleware('auth')->group(function () {
     
     Route::controller(SystemLogsController::class)->group(function (){
         Route::get('/systemlogs', 'index')->name('systemlogs');
+    });
+
+    Route::controller(ReportController::class)->group(function (){
+        Route::get('/reports', 'index')->name('reports');
     });
 
 });
