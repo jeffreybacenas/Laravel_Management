@@ -39,6 +39,22 @@
         width: 200px;
         font-size: 14px;
     }
+
+    .rows-per-page {
+    display: flex;
+    align-items: center;
+}
+
+.rows-per-page label {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.rows-per-page select {
+    width: 80px; /* Adjust the width as needed */
+    font-size: 14px;
+}
   </style>
 
 </head>
