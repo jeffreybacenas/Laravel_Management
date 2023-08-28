@@ -97,13 +97,15 @@
 
         @include('partials._footer')
         <script>
+
+          const bookTitleInput = document.getElementById('bookTitleInput');
+          const bookDescInput = document.getElementById('bookDescInput');
+          const bookAuthorInput = document.getElementById('bookAuthorInput');
+          const bookPubDateInput = document.getElementById('bookPubDateInput');
+
           document.addEventListener('DOMContentLoaded', function () {
 
             const booksTable = document.getElementById('booksTable');
-            const bookTitleInput = document.getElementById('bookTitleInput');
-            const bookDescInput = document.getElementById('bookDescInput');
-            const bookAuthorInput = document.getElementById('bookAuthorInput');
-            const bookPubDateInput = document.getElementById('bookPubDateInput');
             
             booksTable.addEventListener('click', async function (event) {
 
@@ -153,17 +155,10 @@
         }
 
         function clearInputFields() {
-
-          const bookTitleInput = document.getElementById('bookTitleInput');
-          const bookDescInput = document.getElementById('bookDescInput');
-          const bookAuthorInput = document.getElementById('bookAuthorInput');
-          const bookPubDateInput = document.getElementById('bookPubDateInput');
-          
           bookTitleInput.value = '';
           bookDescInput.value = '';
           bookAuthorInput.value = '';
           bookPubDateInput.value = '';
-          
         }
 
       </script>
