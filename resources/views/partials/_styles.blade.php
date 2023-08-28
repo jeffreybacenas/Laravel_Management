@@ -22,6 +22,23 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
-   </style>
+  <style>
+    .search-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end; /* Align to the right */
+        margin-bottom: 10px;
+    }
+
+    .search-label {
+        margin-right: 5px;
+        font-size: 14px;
+    }
+
+    .search-input {
+        width: 200px;
+        font-size: 14px;
+    }
+  </style>
 
 </head>

@@ -20,7 +20,11 @@
 
                  </div>
                   <div class="table-responsive">
-                    
+                    <hr>
+                    <div class="search-container ">
+                      <label for="searchInput" class="search-label">Search:</label>
+                      <input type="text" id="searchInput" class="form-control search-input">
+                    </div>
                     <table class="table table-striped" id="booksTable">
                         <thead>
                             <tr>
