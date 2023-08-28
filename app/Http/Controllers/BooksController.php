@@ -27,9 +27,8 @@ class BooksController extends Controller
             $book->description = $request->description;
             $book->author = $request->author;
             $book->publishdate = $request->publishDate;
-            
             $book->save();
-            
+
             Session::flash('success', 'Book inserted successfully');
 
         }else{

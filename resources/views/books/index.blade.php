@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Handle the response and possibly remove the row from the table
             if (response.ok) {
                 Swal.fire({
-                    icon: 'error',
+                    icon: 'success',
                     title: data.message,
                     toast: true,
                     position: 'top-end', // Position the toast notification at the top-right corner
