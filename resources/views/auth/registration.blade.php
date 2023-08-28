@@ -58,20 +58,21 @@
   </div>
   
   @include('partials._footer')
-@include('partials._script')
-@if ($errors->any())
-    @foreach ($errors->all() as $error)
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: '{{ $error }}',
-                toast: true,
-                position: 'top-end', // Position the toast notification at the top-right corner
-                showConfirmButton: false,
-                timer: 5000 // Display for 5 seconds
-            });
-        </script>
-    @endforeach
-@endif
+  @include('partials._script')
+
+  @if ($errors->any())
+      @foreach ($errors->all() as $error)
+          <script>
+              Swal.fire({
+                  icon: 'error',
+                  title: '{{ $error }}',
+                  toast: true,
+                  position: 'top-end', // Position the toast notification at the top-right corner
+                  showConfirmButton: false,
+                  timer: 5000 // Display for 5 seconds
+              });
+          </script>
+      @endforeach
+  @endif
 
 

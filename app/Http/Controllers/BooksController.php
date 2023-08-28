@@ -17,7 +17,6 @@ class BooksController extends Controller
     public function store(Request $request)
     {
         if($request->bookID == null){
-            dd("no value");
             $data = $request->validate([
                 'title' => 'required|unique:books'
             ]);
@@ -30,7 +29,7 @@ class BooksController extends Controller
             $book->save();
 
         }else{
-            
+
             $data = $request->validate([
                 'title' => 'required|unique:books'
             ]);
