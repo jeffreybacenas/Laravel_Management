@@ -30,6 +30,7 @@ class BooksController extends Controller
         return redirect()->route('books');
     }
 
+    
     public function edit($id)
     {
         $book = Book::findOrFail($id);

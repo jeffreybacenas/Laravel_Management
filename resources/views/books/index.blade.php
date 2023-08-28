@@ -13,7 +13,7 @@
                  <div class="card-body d-flex justify-content-between">
                     <h4 class="card-title">Books Table</h4>
                     <div>
-                      <button class="btn btn-primary rounded-pill px-4 scrollButton">
+                      <button class="btn btn-primary rounded-pill px-4 scrollButton" >
                           <i class="mdi mdi-book-plus mr-2"></i> Add Book
                       </button>
                     </div>
@@ -98,47 +98,74 @@
         @include('partials._footer')
         <script>
           document.addEventListener('DOMContentLoaded', function () {
-          const booksTable = document.getElementById('booksTable');
 
-          booksTable.addEventListener('click', async function (event) {
-            const clickedElement = event.target;
-            const row = clickedElement.closest('tr');
+            const booksTable = document.getElementById('booksTable');
             const bookTitleInput = document.getElementById('bookTitleInput');
             const bookDescInput = document.getElementById('bookDescInput');
             const bookAuthorInput = document.getElementById('bookAuthorInput');
             const bookPubDateInput = document.getElementById('bookPubDateInput');
+            
+            booksTable.addEventListener('click', async function (event) {
 
-        if (clickedElement.classList.contains('editButton')) {
-            const bookId = row.getAttribute('data-id');
+              const clickedElement = event.target;
+              const row = clickedElement.closest('tr');
+              
+
+            if (clickedElement.classList.contains('editButton')) {
+
+                const bookId = row.getAttribute('data-id');
+                try {
+                    const bookData = await fetchBookData(bookId);
+                    bookTitleInput.value = bookData.title;
+                    bookDescInput.value = bookData.description;
+                    bookAuthorInput.value = bookData.author;
+                    bookPubDateInput.value = bookData.publishdate;
+                    console.log(bookId);
+                } catch (error) {
+                    console.error('An error occurred:', error);
+                }
+            }
+        
+          });
+
+          const scrollButton = document.querySelector('.scrollButton');
+
+          scrollButton.addEventListener('click', function () {
+              console.log("BANANA");
+              clearInputFields();
+          });
+
+        });
+
+        async function fetchBookData(bookId) {
             try {
-                const bookData = await fetchBookData(bookId);
-                bookTitleInput.value = bookData.title;
-                bookDescInput.value = bookData.description;
-                bookAuthorInput.value = bookData.author;
-                bookPubDateInput.value = bookData.publishdate;
-                console.log(bookId);
-                // Now you can handle the data received from the backend
+                const response = await fetch(`/books/edit/${bookId}`);
+
+                if (response.ok) {
+                    const bookData = await response.json();
+                    return bookData;
+                } else {
+                    throw new Error('Failed to fetch book data');
+                }
             } catch (error) {
-                console.error('An error occurred:', error);
+                throw error;
             }
         }
-    });
-});
 
-async function fetchBookData(bookId) {
-    try {
-        const response = await fetch(`/books/edit/${bookId}`);
+        function clearInputFields() {
 
-        if (response.ok) {
-            const bookData = await response.json();
-            return bookData;
-        } else {
-            throw new Error('Failed to fetch book data');
+          const bookTitleInput = document.getElementById('bookTitleInput');
+          const bookDescInput = document.getElementById('bookDescInput');
+          const bookAuthorInput = document.getElementById('bookAuthorInput');
+          const bookPubDateInput = document.getElementById('bookPubDateInput');
+          
+          bookTitleInput.value = '';
+          bookDescInput.value = '';
+          bookAuthorInput.value = '';
+          bookPubDateInput.value = '';
+          
         }
-    } catch (error) {
-        throw error;
-    }
-}
+
       </script>
         @include('partials._script')
         
