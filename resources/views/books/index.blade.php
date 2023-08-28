@@ -232,6 +232,25 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
+    document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('searchInput');
+    const tableRows = document.querySelectorAll('#booksTable tbody tr');
+
+    searchInput.addEventListener('input', function () {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+
+        tableRows.forEach(row => {
+            const rowData = row.textContent.toLowerCase();
+
+            if (rowData.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+
       </script>
         @include('partials._script')
 
