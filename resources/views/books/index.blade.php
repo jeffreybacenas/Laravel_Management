@@ -65,6 +65,7 @@
                   <form action="{{ route ('books.store') }}" method="POST" class="forms-sample">
                    @csrf
 
+                    <input type="text" name="bookID" id="bookID" hidden>
                     <div class="form-group">
                         <label >Book Title</label>
                         <input type="text" class="form-control" id="bookTitleInput" name="title" placeholder="Book Title">
@@ -94,24 +95,23 @@
             </div>
           </div>
         </div>
-
         @include('partials._footer')
+
         <script>
 
+          const booksTable = document.getElementById('booksTable');
+          const bookID = document.getElementById('bookID');
           const bookTitleInput = document.getElementById('bookTitleInput');
           const bookDescInput = document.getElementById('bookDescInput');
           const bookAuthorInput = document.getElementById('bookAuthorInput');
           const bookPubDateInput = document.getElementById('bookPubDateInput');
 
           document.addEventListener('DOMContentLoaded', function () {
-
-            const booksTable = document.getElementById('booksTable');
             
             booksTable.addEventListener('click', async function (event) {
 
               const clickedElement = event.target;
               const row = clickedElement.closest('tr');
-              
 
             if (clickedElement.classList.contains('editButton')) {
 
@@ -122,7 +122,8 @@
                     bookDescInput.value = bookData.description;
                     bookAuthorInput.value = bookData.author;
                     bookPubDateInput.value = bookData.publishdate;
-                    console.log(bookId);
+                    bookID.value = bookId;
+
                 } catch (error) {
                     console.error('An error occurred:', error);
                 }
@@ -132,10 +133,9 @@
 
           const scrollButton = document.querySelector('.scrollButton');
 
-          scrollButton.addEventListener('click', function () {
-              console.log("BANANA");
-              clearInputFields();
-          });
+            scrollButton.addEventListener('click', function () {
+                clearInputFields();
+            });
 
         });
 

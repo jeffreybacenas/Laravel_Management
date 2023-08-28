@@ -16,21 +16,35 @@ class BooksController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title' => 'required|unique:books'
-        ]);
+        if($request->bookID == null){
+            dd("no value");
+            $data = $request->validate([
+                'title' => 'required|unique:books'
+            ]);
 
-        $book = new Book;
-        $book->title = $data['title'];
-        $book->description = $request->description;
-        $book->author = $request->author;
-        $book->publishdate = $request->publishDate;
-        $book->save();
+            $book = new Book;
+            $book->title = $data['title'];
+            $book->description = $request->description;
+            $book->author = $request->author;
+            $book->publishdate = $request->publishDate;
+            $book->save();
+
+        }else{
+
+            $book = Book::find($request->bookID);
+
+            $book->title = $request->title;
+            $book->description = $request->description;
+            $book->author = $request->author;
+            $book->publishdate = $request->publishDate;
+            $book->save();
+            
+        }
         
         return redirect()->route('books');
     }
 
-    
+
     public function edit($id)
     {
         $book = Book::findOrFail($id);
