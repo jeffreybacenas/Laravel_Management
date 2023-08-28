@@ -20,21 +20,22 @@
 
                  </div>
                   <div class="table-responsive">
-                  <div class="table-controls d-flex justify-content-between mb-3">
-    <div class="rows-per-page">
-        <label for="rowsPerPage" class="mr-2">Rows per page:</label>
-        <select id="rowsPerPage" class="form-control form-control-sm">
-            <option value="10">10</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-        </select>
-    </div>
-    
-    <div class="search-container ml-auto"> <!-- Add ml-auto to align to the right -->
-        <label for="searchInput" class="search-label">Search:</label>
-        <input type="text" id="searchInput" class="form-control form-control-sm search-input">
-    </div>
-</div>
+                    
+                    <div class="table-controls d-flex justify-content-between mb-3">
+                      <div class="rows-per-page">
+                          <label for="rowsPerPage" class="mr-2">Rows per page:</label>
+                          <select id="rowsPerPage" class="form-control form-control-sm">
+                              <option value="10">10</option>
+                              <option value="50">50</option>
+                              <option value="100">100</option>
+                          </select>
+                      </div>
+                  
+                      <div class="search-container ml-auto"> <!-- Add ml-auto to align to the right -->
+                          <label for="searchInput" class="search-label">Search:</label>
+                          <input type="text" id="searchInput" class="form-control form-control-sm search-input">
+                      </div>
+                    </div>
 
                     <table class="table table-striped" id="booksTable">
                         <thead>
@@ -69,6 +70,13 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="pagination-container d-flex justify-content-center mt-3">
+        <ul class="pagination">
+            <li class="page-item" data-page="1"><a class="page-link" href="#">1</a></li>
+            <li class="page-item" data-page="2"><a class="page-link" href="#">2</a></li>
+            <!-- Add more li elements for additional pages -->
+        </ul>
+    </div>
                   </div>
                 </div>
               </div>
