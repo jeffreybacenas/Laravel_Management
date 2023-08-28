@@ -30,15 +30,19 @@ class BooksController extends Controller
             $book->save();
 
         }else{
+            
+            $data = $request->validate([
+                'title' => 'required|unique:books'
+            ]);
 
             $book = Book::find($request->bookID);
 
-            $book->title = $request->title;
+            $book->title = $dat['title'];
             $book->description = $request->description;
             $book->author = $request->author;
             $book->publishdate = $request->publishDate;
             $book->save();
-            
+
         }
         
         return redirect()->route('books');
