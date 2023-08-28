@@ -42,9 +42,9 @@
                                     <a class="btn btn-sm btn-primary scrollButton editButton">
                                         <i class="mdi mdi-pencil"></i> Edit
                                     </a>
-                                    <a href="" class="btn btn-sm btn-danger">
-                                        <i class="mdi mdi-delete"></i> Delete
-                                    </a>
+                                    <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $book->id }}">
+                                      <i class="mdi mdi-delete"></i> Delete
+                                    </button>
                                 </td>
                             </tr>
                             @empty
@@ -161,6 +161,73 @@
           bookPubDateInput.value = '';
         }
 
+        // Delete button click event
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteButtons = document.querySelectorAll('.deleteButton');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const bookId = this.getAttribute('data-id');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Perform delete action
+                    deleteBook(bookId);
+                }
+            });
+        });
+    });
+
+    async function deleteBook(bookId) {
+        try {
+            const response = await fetch(`/books/delete/${bookId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            });
+            
+            const data = await response.json();
+            // Handle the response and possibly remove the row from the table
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'error',
+                    title: data.message,
+                    toast: true,
+                    position: 'top-end', // Position the toast notification at the top-right corner
+                    showConfirmButton: false,
+                    timer: 5000 // Display for 5 seconds
+                });
+                // Remove the deleted row from the table
+                const row = document.querySelector(`tr[data-id="${bookId}"]`);
+                if (row) {
+                    row.remove();
+                }
+            } else {
+              Swal.fire({
+                    icon: 'error',
+                    title: data.message,
+                    toast: true,
+                    position: 'top-end', // Position the toast notification at the top-right corner
+                    showConfirmButton: false,
+                    timer: 5000 // Display for 5 seconds
+                });
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+      }
+    });
+
       </script>
         @include('partials._script')
 
@@ -178,5 +245,18 @@
             </script>
         @endforeach
       @endif
+
+      @if(session('success'))
+          <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('success') }}',
+                toast: true,
+                position: 'top-end', // Position the toast notification at the top-right corner
+                showConfirmButton: false,
+                timer: 3000 // Display for 3 seconds
+            });
+          </script>
+        @endif
         
 

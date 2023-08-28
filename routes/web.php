@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/books', 'index')->name('books');
         Route::post('/books/store', 'store')->name('books.store');
         Route::get('/books/edit/{id}', 'edit')->name('books.edit');
+        Route::delete('/books/delete/{id}', 'delete')->name('books.delete');
     });
     
     Route::controller(CategoryController::class)->group(function (){
