@@ -30,7 +30,19 @@
                       <tbody>
                             @forelse($dvds as $dvd)
                             <tr data-id="{{ $dvd->id }}">
-                                
+                            <td>{{ $dvd->id }}</td>
+                                <td>{{ $dvd->name }}</td>
+                                <td style="color: {{ $dvd->description ? 'inherit' : 'blue' }};">{{ $dvd->description ? $dvd->description : 'N/A' }}</td>
+                                <td style="color: {{ $dvd->created_at ? 'inherit' : 'blue' }};">{{ $dvd->created_at ? \Carbon\Carbon::parse($dvd->created_at)->format('M d, Y') : 'N/A' }}</td>
+                                <td style="color: {{ $dvd->created_at ? 'inherit' : 'blue' }};">{{ $dvd->created_at ? \Carbon\Carbon::parse($dvd->created_at)->format('M d, Y') : 'N/A' }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary scrollButton editButton">
+                                        <i class="mdi mdi-pencil"></i> Edit
+                                    </a>
+                                    <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $dvd->id }}">
+                                      <i class="mdi mdi-delete"></i> Delete
+                                    </button>
+                                </td>
                             </tr>
                             @empty
                             <tr>
@@ -46,37 +58,23 @@
             <div class="col-md-12 grid-margin stretch-card" id="Info">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title text-center">Books And Returns Information</h4><hr>
-                  <form class="forms-sample">
-
-                   <div class="form-group">
-                      <label for="bookSelection">Select a Book: </label>
-                      <select class="form-control" id="bookSelection">
-                       <option value="the-notebook">The Notebook</option>
-                       <option value="the-dog">The Dog</option>
-                       <option value="the-cat">The Cat</option>
-                       <option value="the-egg">The Egg</option>
-                     </select>
-                  </div>
-
-                  <div class="form-group">
-                      <label for="bookSelection">Select a User: </label>
-                      <select class="form-control" id="bookSelection">
-                       <option value="the-notebook">The Notebook</option>
-                       <option value="the-dog">The Dog</option>
-                       <option value="the-cat">The Cat</option>
-                       <option value="the-egg">The Egg</option>
-                     </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="dueDate">Due Date:</label>
-                    <input type="date" class="form-control" id="dueDate">
-                  </div><br>
-
-                    <div class="text-center"> <!-- Added this div with "text-center" class -->
-                      <button type="submit" class="btn btn-primary me-2 w-50">Submit</button>
+                  <h4 class="card-title text-center">DVD Information</h4><hr>
+                  <form action="{{ route('dvd.store') }}" method="POST" class="forms-sample">
+                    @csrf
+                    <input type="text" name="dvdId" id="dvdId" hidden>
+                    <div class="form-group">
+                          <label>DVD Name</label>
+                          <input type="text" class="form-control" id="name" name="name" placeholder="DVD Name">
                     </div>
+                    <div class="form-group">
+                          <label>DVD Description</label>
+                          <input type="text" class="form-control" id="desc" name="dvdDesc" placeholder="DVD Description">
+                    </div><br>
+
+                      <div class="text-center"> <!-- Added this div with "text-center" class -->
+                        <button type="submit" class="btn btn-success me-2 w-50">Submit</button>
+                      </div>
+
                   </form>
                 </div>
               </div>

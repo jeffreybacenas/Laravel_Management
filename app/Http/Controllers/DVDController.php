@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Dvd;
+
 class DVDController extends Controller
 {
     public function index()
@@ -16,18 +19,17 @@ class DVDController extends Controller
     public function store(Request $request)
     {
         if($request->bookID == null){
+
             $data = $request->validate([
-                'title' => 'required|unique:books'
+                'name' => 'required|unique:dvds'
             ]);
 
-            $book = new Book;
-            $book->title = $data['title'];
-            $book->description = $request->description;
-            $book->author = $request->author;
-            $book->publishdate = $request->publishDate;
-            $book->save();
+            $dvd = new Dvd;
+            $dvd->name = $data['name'];
+            $dvd->description = $request->dvdDesc;
+            $dvd->save();
 
-            Session::flash('success', 'Book inserted successfully');
+            Session::flash('success', 'DVD inserted successfully');
 
         }else{
 
