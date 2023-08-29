@@ -17,7 +17,7 @@ class MagazineController extends Controller
 
     public function store(Request $request)
     {
-        // if($request->bookID == null){
+         if($request->magazineId == null){
 
             $data = $request->validate([
                 'name' => 'required|unique:magazines'
@@ -30,23 +30,21 @@ class MagazineController extends Controller
 
             Session::flash('success', 'Magazine inserted successfully');
 
-        // }else{
+        }else{
 
-        //     $data = $request->validate([
-        //         'title' => 'required|unique:books'
-        //     ]);
+            $data = $request->validate([
+                'name' => 'required|unique:magazines'
+            ]);
 
-        //     $magazine = Magazine::find($request->bookID);
+            $magazine = Magazine::find($request->magazineId);
 
-        //     $magazine->title = $data['title'];
-        //     $magazine->description = $request->description;
-        //     $magazine->author = $request->author;
-        //     $magazine->publishdate = $request->publishDate;
-        //     $magazine->save();
+            $magazine->name = $data['name'];
+            $magazine->description = $request->description;
+            $magazine->save();
             
-        //     Session::flash('success', 'Magazine updated successfully');
+            Session::flash('success', 'Magazine updated successfully');
 
-        // }
+        }
         
         return redirect()->route('magazines');
     }

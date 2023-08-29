@@ -69,7 +69,7 @@
                   <h4 class="card-title text-center">Magazine Information</h4><hr>
                   <form action="{{ route('magazines.store') }}" method="POST" class="forms-sample">
                    @csrf
-                   <input type="text">
+                   <input type="text" name="magazineId" id="magazineId" hidden>
                   <div class="form-group">
                         <label for="exampleInputFirstName">Magazine Name</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Magazine Name">
@@ -93,7 +93,7 @@
         <script>
 
           const magazineTable = document.getElementById('magazineTable');
-          const magazineID = document.getElementById('name');
+          const magazineID = document.getElementById('magazineId');
           const magazineName = document.getElementById('name');
           const magazineDesc = document.getElementById('desc');
 
@@ -147,11 +147,9 @@
         }
 
         function clearInputFields() {
-          bookTitleInput.value = '';
-          bookDescInput.value = '';
-          bookAuthorInput.value = '';
-          bookPubDateInput.value = '';
-          bookID.value = '';
+          magazineName.value = '';
+          magazineDesc.value = '';
+          magazineID.value = '';
 
         }
 
