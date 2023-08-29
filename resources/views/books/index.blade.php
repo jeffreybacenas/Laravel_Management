@@ -21,16 +21,7 @@
                  </div>
                   <div class="table-responsive">
                     
-                    <div class="table-controls d-flex justify-content-between mb-3">
-                      <div class="rows-per-page">
-                          <label for="rowsPerPage" class="mr-2">Rows per page:</label>
-                          <select id="rowsPerPage" class="form-control form-control-sm">
-                              <option value="10">10</option>
-                              <option value="50">50</option>
-                              <option value="100">100</option>
-                          </select>
-                      </div>
-                  
+                    <div class="table-controls d-flex text-center">
                       <div class="search-container ml-auto"> <!-- Add ml-auto to align to the right -->
                           <label for="searchInput" class="search-label">Search:</label>
                           <input type="text" id="searchInput" class="form-control form-control-sm search-input">
@@ -108,7 +99,7 @@
                   </div><br>
 
                     <div class="text-center"> <!-- Added this div with "text-center" class -->
-                      <button type="submit" class="btn btn-primary me-2 w-50">Submit</button>
+                      <button type="submit" class="btn btn-success me-2 w-50">Submit</button>
                     </div>
                   </form>
                 </div>
@@ -184,71 +175,71 @@
         }
 
         // Delete button click event
-document.addEventListener('DOMContentLoaded', function () {
-    const deleteButtons = document.querySelectorAll('.deleteButton');
+        document.addEventListener('DOMContentLoaded', function () {
+          const deleteButtons = document.querySelectorAll('.deleteButton');
 
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const bookId = this.getAttribute('data-id');
+          deleteButtons.forEach(button => {
+              button.addEventListener('click', function () {
+                  const bookId = this.getAttribute('data-id');
 
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You won\'t be able to revert this!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Perform delete action
-                    deleteBook(bookId);
-                }
-            });
+                  Swal.fire({
+                      title: 'Are you sure?',
+                      text: 'You won\'t be able to revert this!',
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Yes, delete it!'
+                  }).then((result) => {
+                      if (result.isConfirmed) {
+                          // Perform delete action
+                          deleteBook(bookId);
+                      }
+                });
+           });
         });
-    });
 
-    async function deleteBook(bookId) {
-        try {
-            const response = await fetch(`/books/delete/${bookId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
-            });
-            
-            const data = await response.json();
-            // Handle the response and possibly remove the row from the table
-            if (response.ok) {
+        async function deleteBook(bookId) {
+          try {
+              const response = await fetch(`/books/delete/${bookId}`, {
+                  method: 'DELETE',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                  }
+              });
+              
+              const data = await response.json();
+              // Handle the response and possibly remove the row from the table
+              if (response.ok) {
+                  Swal.fire({
+                      icon: 'success',
+                      title: data.message,
+                      toast: true,
+                      position: 'top-end', // Position the toast notification at the top-right corner
+                      showConfirmButton: false,
+                      timer: 5000 // Display for 5 seconds
+                  });
+                  // Remove the deleted row from the table
+                  const row = document.querySelector(`tr[data-id="${bookId}"]`);
+                  if (row) {
+                      row.remove();
+                  }
+              } else {
                 Swal.fire({
-                    icon: 'success',
-                    title: data.message,
-                    toast: true,
-                    position: 'top-end', // Position the toast notification at the top-right corner
-                    showConfirmButton: false,
-                    timer: 5000 // Display for 5 seconds
-                });
-                // Remove the deleted row from the table
-                const row = document.querySelector(`tr[data-id="${bookId}"]`);
-                if (row) {
-                    row.remove();
-                }
-            } else {
-              Swal.fire({
-                    icon: 'error',
-                    title: data.message,
-                    toast: true,
-                    position: 'top-end', // Position the toast notification at the top-right corner
-                    showConfirmButton: false,
-                    timer: 5000 // Display for 5 seconds
-                });
+                      icon: 'error',
+                      title: data.message,
+                      toast: true,
+                      position: 'top-end', // Position the toast notification at the top-right corner
+                      showConfirmButton: false,
+                      timer: 5000 // Display for 5 seconds
+                  });
+              }
+            } catch (error) {
+              console.error('An error occurred:', error);
             }
-        } catch (error) {
-            console.error('An error occurred:', error);
-        }
-      }
-    });
+          }
+        });
 
     document.addEventListener('DOMContentLoaded', function () {
       const searchInput = document.getElementById('searchInput');
@@ -268,51 +259,6 @@ document.addEventListener('DOMContentLoaded', function () {
           });
       });
     });
-    document.addEventListener('DOMContentLoaded', function () {
-    // Your existing initialization code
-    
-    const paginationContainer = document.querySelector('.pagination');
-    const rowsPerPage = parseInt(rowsPerPageSelect.value, 10);
-    let currentPage = 1;
-
-    function renderPage(pageNumber) {
-        tableRows.forEach(row => row.style.display = 'none');
-
-        const startIndex = (pageNumber - 1) * rowsPerPage;
-        const endIndex = startIndex + rowsPerPage;
-
-        for (let i = startIndex; i < endIndex && i < tableRows.length; i++) {
-            tableRows[i].style.display = '';
-        }
-    }
-
-    function renderPagination() {
-        const totalPages = Math.ceil(tableRows.length / rowsPerPage);
-
-        paginationContainer.innerHTML = '';
-
-        for (let i = 1; i <= totalPages; i++) {
-            const li = document.createElement('li');
-            const link = document.createElement('a');
-            
-            link.textContent = i;
-            link.href = '#';
-            
-            link.addEventListener('click', function() {
-                currentPage = i;
-                renderPage(currentPage);
-                renderPagination();
-            });
-            
-            li.appendChild(link);
-            paginationContainer.appendChild(li);
-        }
-    }
-
-    // Initial rendering
-    renderPage(currentPage);
-    renderPagination();
-});
 
 
       </script>
