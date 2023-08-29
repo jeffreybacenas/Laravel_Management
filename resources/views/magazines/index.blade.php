@@ -223,7 +223,7 @@
 
     document.addEventListener('DOMContentLoaded', function () {
       const searchInput = document.getElementById('searchInput');
-      const tableRows = document.querySelectorAll('#booksTable tbody tr');
+      const tableRows = document.querySelectorAll('#magazineTable tbody tr');
 
       searchInput.addEventListener('input', function () {
           const searchTerm = searchInput.value.trim().toLowerCase();

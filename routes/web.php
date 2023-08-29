@@ -53,6 +53,13 @@ Route::middleware('auth')->group(function () {
         Route::delete('/magazines/delete/{id}', 'delete')->name('magazines.delete');
     });
     
+    Route::controller(DVDController::class)->group(function (){
+        Route::get('/dvd', 'index')->name('dvd');
+        Route::post('/dvd/store', 'store')->name('dvd.store');
+        Route::get('/dvd/edit/{id}', 'edit')->name('dvd.edit');
+        Route::delete('/dvd/delete/{id}', 'delete')->name('dvd.delete');
+    });
+
     Route::controller(CategoryController::class)->group(function (){
         Route::get('/category', 'index')->name('category');
     });
@@ -70,9 +77,7 @@ Route::middleware('auth')->group(function () {
     });
     
     
-    Route::controller(DVDController::class)->group(function (){
-        Route::get('/dvd', 'index')->name('dvd');
-    });
+
     
     Route::controller(SystemLogsController::class)->group(function (){
         Route::get('/systemlogs', 'index')->name('systemlogs');
