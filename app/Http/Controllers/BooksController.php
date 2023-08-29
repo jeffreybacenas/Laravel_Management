@@ -34,7 +34,7 @@ class BooksController extends Controller
         }else{
 
             $data = $request->validate([
-                'title' => 'required|unique:books'
+                'title' => 'required|unique:books,title,' .$request->bookID,
             ]);
 
             $book = Book::find($request->bookID);

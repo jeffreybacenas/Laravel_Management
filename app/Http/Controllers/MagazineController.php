@@ -25,21 +25,21 @@ class MagazineController extends Controller
 
             $magazine = new Magazine;
             $magazine->name = $data['name'];
-            $magazine->description = $request->description;
+            $magazine->description = $request->magazineDesc;
             $magazine->save();
 
             Session::flash('success', 'Magazine inserted successfully');
 
         }else{
-
+            
             $data = $request->validate([
-                'name' => 'required|unique:magazines'
+                'name' => 'required|unique:magazines,name,' . $request->magazineId,
             ]);
 
             $magazine = Magazine::find($request->magazineId);
 
             $magazine->name = $data['name'];
-            $magazine->description = $request->description;
+            $magazine->description = $request->magazineDesc;
             $magazine->save();
             
             Session::flash('success', 'Magazine updated successfully');
