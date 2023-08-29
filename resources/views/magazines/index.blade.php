@@ -54,7 +54,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" class="text-center">No records found.</td>
+                                <td colspan="6" class="text-center">No records found.</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -67,15 +67,16 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title text-center">Magazine Information</h4><hr>
-                  <form class="forms-sample">
-
+                  <form action="{{ route('magazines.store') }}" method="POST" class="forms-sample">
+                   @csrf
+                   <input type="text">
                   <div class="form-group">
                         <label for="exampleInputFirstName">Magazine Name</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Magazine Name">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Magazine Name">
                   </div>
                   <div class="form-group">
                         <label for="exampleInputFirstName">Magazine Description</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Magazine Description">
+                        <input type="text" class="form-control" id="desc" name="magazineDesc" placeholder="Magazine Description">
                   </div><br>
 
                     <div class="text-center"> <!-- Added this div with "text-center" class -->
@@ -92,8 +93,9 @@
         <script>
 
           const magazineTable = document.getElementById('magazineTable');
-          const bookTitleInput = document.getElementById('bookTitleInput');
-          const bookDescInput = document.getElementById('bookDescInput');
+          const magazineID = document.getElementById('name');
+          const magazineName = document.getElementById('name');
+          const magazineDesc = document.getElementById('desc');
 
           document.addEventListener('DOMContentLoaded', function () {
             
@@ -104,12 +106,16 @@
 
             if (clickedElement.classList.contains('editButton')) {
 
-                const bookId = row.getAttribute('data-id');
+                const magazineId = row.getAttribute('data-id');
+
                 try {
-                    const bookData = await fetchBookData(bookId);
-                    bookTitleInput.value = bookData.title;
-                    bookDescInput.value = bookData.description;
-                    magazineID.value = bookId;
+
+                    const magazineData = await fetchMagazineData(magazineId);
+
+                    magazineName.value = magazineData.name;
+                    magazineDesc.value = magazineData.description;
+                    magazineID.value = magazineId;
+
                 } catch (error) {
                     console.error('An error occurred:', error);
                 }
@@ -125,13 +131,13 @@
 
         });
 
-        async function fetchBookData(bookId) {
+        async function fetchMagazineData(magazineId) {
             try {
-                const response = await fetch(`/books/edit/${bookId}`);
+                const response = await fetch(`/magazines/edit/${magazineId}`);
 
                 if (response.ok) {
-                    const bookData = await response.json();
-                    return bookData;
+                    const magazineData = await response.json();
+                    return magazineData;
                 } else {
                     throw new Error('Failed to fetch book data');
                 }
@@ -234,7 +240,32 @@
           });
       });
     });
-
-
       </script>
         @include('partials._script')
+        @if ($errors->any())
+          @foreach ($errors->all() as $error)
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: '{{ $error }}',
+                    toast: true,
+                    position: 'top-end', // Position the toast notification at the top-right corner
+                    showConfirmButton: false,
+                    timer: 5000 // Display for 5 seconds
+                });
+            </script>
+        @endforeach
+      @endif
+
+      @if(session('success'))
+          <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('success') }}',
+                toast: true,
+                position: 'top-end', // Position the toast notification at the top-right corner
+                showConfirmButton: false,
+                timer: 3000 // Display for 3 seconds
+            });
+          </script>
+        @endif

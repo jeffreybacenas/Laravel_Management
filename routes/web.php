@@ -44,6 +44,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/books/edit/{id}', 'edit')->name('books.edit');
         Route::delete('/books/delete/{id}', 'delete')->name('books.delete');
     });
+
+    
+    Route::controller(MagazineController::class)->group(function (){
+        Route::get('/magazines', 'index')->name('magazines');
+        Route::post('/magazines/store', 'store')->name('magazines.store');
+        Route::get('/magazines/edit/{id}', 'edit')->name('magazines.edit');
+        Route::delete('/magazines/delete/{id}', 'delete')->name('magazines.delete');
+    });
     
     Route::controller(CategoryController::class)->group(function (){
         Route::get('/category', 'index')->name('category');
@@ -61,9 +69,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/bookandreturn', 'index')->name('bookandreturn');
     });
     
-    Route::controller(MagazineController::class)->group(function (){
-        Route::get('/magazines', 'index')->name('magazines');
-    });
     
     Route::controller(DVDController::class)->group(function (){
         Route::get('/dvd', 'index')->name('dvd');
