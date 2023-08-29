@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Dvd;
+use App\Models\Dvd;
 class DVDController extends Controller
 {
     public function index()
