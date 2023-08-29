@@ -45,7 +45,6 @@ Route::middleware('auth')->group(function () {
         Route::delete('/books/delete/{id}', 'delete')->name('books.delete');
     });
 
-    
     Route::controller(MagazineController::class)->group(function (){
         Route::get('/magazines', 'index')->name('magazines');
         Route::post('/magazines/store', 'store')->name('magazines.store');
