@@ -9,6 +9,12 @@
                 userInfoSection.scrollIntoView({ behavior: "smooth" });
             });
         });
+
+        var elems = document.getElementById("navId");
+
+        [].forEach.call(elems, function(el) {
+            el.classList.remove("mt-3");
+        });
     });
 
 </script>
