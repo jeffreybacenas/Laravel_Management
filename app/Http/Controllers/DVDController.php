@@ -50,7 +50,7 @@ class DVDController extends Controller
 
         }
         
-        return redirect()->route('books');
+        return redirect()->route('dvd');
     }
 
 
