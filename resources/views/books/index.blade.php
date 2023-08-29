@@ -71,12 +71,10 @@
                         </tbody>
                     </table>
                     <div class="pagination-container d-flex justify-content-center mt-3">
-        <ul class="pagination">
-            <li class="page-item" data-page="1"><a class="page-link" href="#">1</a></li>
-            <li class="page-item" data-page="2"><a class="page-link" href="#">2</a></li>
-            <!-- Add more li elements for additional pages -->
-        </ul>
-    </div>
+                      <ul class="pagination">
+                          <!-- Pagination links will be added here dynamically -->
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -146,7 +144,6 @@
                     bookAuthorInput.value = bookData.author;
                     bookPubDateInput.value = bookData.publishdate;
                     bookID.value = bookId;
-
                 } catch (error) {
                     console.error('An error occurred:', error);
                 }
@@ -182,6 +179,8 @@
           bookDescInput.value = '';
           bookAuthorInput.value = '';
           bookPubDateInput.value = '';
+          bookID.value = '';
+
         }
 
         // Delete button click event
@@ -252,23 +251,69 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.getElementById('searchInput');
-    const tableRows = document.querySelectorAll('#booksTable tbody tr');
+      const searchInput = document.getElementById('searchInput');
+      const tableRows = document.querySelectorAll('#booksTable tbody tr');
 
-    searchInput.addEventListener('input', function () {
-        const searchTerm = searchInput.value.trim().toLowerCase();
+      searchInput.addEventListener('input', function () {
+          const searchTerm = searchInput.value.trim().toLowerCase();
 
-        tableRows.forEach(row => {
-            const rowData = row.textContent.toLowerCase();
+          tableRows.forEach(row => {
+              const rowData = row.textContent.toLowerCase();
 
-            if (rowData.includes(searchTerm)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
+              if (rowData.includes(searchTerm)) {
+                  row.style.display = '';
+              } else {
+                  row.style.display = 'none';
+              }
+          });
+      });
     });
+    document.addEventListener('DOMContentLoaded', function () {
+    // Your existing initialization code
+    
+    const paginationContainer = document.querySelector('.pagination');
+    const rowsPerPage = parseInt(rowsPerPageSelect.value, 10);
+    let currentPage = 1;
+
+    function renderPage(pageNumber) {
+        tableRows.forEach(row => row.style.display = 'none');
+
+        const startIndex = (pageNumber - 1) * rowsPerPage;
+        const endIndex = startIndex + rowsPerPage;
+
+        for (let i = startIndex; i < endIndex && i < tableRows.length; i++) {
+            tableRows[i].style.display = '';
+        }
+    }
+
+    function renderPagination() {
+        const totalPages = Math.ceil(tableRows.length / rowsPerPage);
+
+        paginationContainer.innerHTML = '';
+
+        for (let i = 1; i <= totalPages; i++) {
+            const li = document.createElement('li');
+            const link = document.createElement('a');
+            
+            link.textContent = i;
+            link.href = '#';
+            
+            link.addEventListener('click', function() {
+                currentPage = i;
+                renderPage(currentPage);
+                renderPagination();
+            });
+            
+            li.appendChild(link);
+            paginationContainer.appendChild(li);
+        }
+    }
+
+    // Initial rendering
+    renderPage(currentPage);
+    renderPagination();
 });
+
 
       </script>
         @include('partials._script')
