@@ -157,11 +157,12 @@
 
         // Delete button click event
         document.addEventListener('DOMContentLoaded', function () {
+
           const deleteButtons = document.querySelectorAll('.deleteButton');
 
           deleteButtons.forEach(button => {
               button.addEventListener('click', function () {
-                  const bookId = this.getAttribute('data-id');
+                  const magazineId = this.getAttribute('data-id');
 
                   Swal.fire({
                       title: 'Are you sure?',
@@ -174,15 +175,15 @@
                   }).then((result) => {
                       if (result.isConfirmed) {
                           // Perform delete action
-                          deleteBook(bookId);
+                          deleteMagazine(magazineId);
                       }
                 });
            });
         });
 
-        async function deleteBook(bookId) {
+        async function deleteMagazine(magazineId) {
           try {
-              const response = await fetch(`/books/delete/${bookId}`, {
+              const response = await fetch(`/magazines/delete/${magazineId}`, {
                   method: 'DELETE',
                   headers: {
                       'Content-Type': 'application/json',
@@ -202,7 +203,7 @@
                       timer: 5000 // Display for 5 seconds
                   });
                   // Remove the deleted row from the table
-                  const row = document.querySelector(`tr[data-id="${bookId}"]`);
+                  const row = document.querySelector(`tr[data-id="${magazineId}"]`);
                   if (row) {
                       row.remove();
                   }
