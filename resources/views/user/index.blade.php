@@ -59,7 +59,7 @@
                 <div class="card-body">
                   <h4 class="card-title text-center">User Information</h4><hr>
                   <form action="{{ route('user.store') }}" method="POST" class="forms-sample">
-                  @crsf
+                  @csrf
                   <input type="text" name="userID" id="userID" hidden>
                   <div class="form-group">
                     <div class="row">

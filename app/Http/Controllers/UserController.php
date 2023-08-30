@@ -22,15 +22,18 @@ class UserController extends Controller
         if($request->userID == null){
             
             $data = $request->validate([
-                'name' => 'required|unique:categories'
+                'fname' => 'required',
+                'lname' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:3|confirmed',
             ]);
-
-            $category = new Category;
-            $category->name = $data['name'];
-            $category->description = $request->desc;
-            $category->save();
-
-            Session::flash('success', 'Category inserted successfully');
+    
+            $user = new User();
+            $user->name = $data['fname'] . ' ' . $data['lname']; 
+            $user->email = $data['email'];
+            $user->role_id = 1;
+            $user->password = bcrypt($data['password']);
+            $user->save();
 
         }else{
 
