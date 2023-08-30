@@ -58,16 +58,18 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title text-center">Category Information</h4><hr>
-                  <form class="forms-sample">
+                  <form action="{{ route('category.store') }}" method="POST" class="forms-sample">
+                  @csrf
 
+                    <input type="text" name="catID" id="catID" hidden>
                     <div class="form-group">
                         <label for="exampleInputFirstName">Category Name</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Category Name">
+                        <input type="text" class="form-control" id="categoryName" name="name" placeholder="Category Name">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputFirstName">Category Description</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Category Description">
+                        <input type="text" class="form-control" id="desc" name="desc" placeholder="Category Description">
                     </div><br>
 
                     <div class="text-center"> <!-- Added this div with "text-center" class -->

@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(CategoryController::class)->group(function (){
         Route::get('/category', 'index')->name('category');
+        Route::post('/category/store', 'store')->name('category.store');
     });
     
     Route::controller(UserController::class)->group(function (){
