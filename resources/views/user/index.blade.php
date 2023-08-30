@@ -87,11 +87,11 @@
                      <div class="row">
                       <div class="col">
                           <label for="exampleInputFirstName">Password</label>
-                          <input type="text" class="form-control" id="password" name="password" placeholder="Password">
+                          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                       </div>
                       <div class="col">
                           <label for="exampleInputFirstName">Confirm Password</label>
-                          <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password">
+                          <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">
                       </div>
                      </div>
                     </div><br>

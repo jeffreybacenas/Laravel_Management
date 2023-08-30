@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -34,6 +35,8 @@ class UserController extends Controller
             $user->role_id = 1;
             $user->password = bcrypt($data['password']);
             $user->save();
+
+            Session::flash('success', 'User inserted successfully');
 
         }else{
 
