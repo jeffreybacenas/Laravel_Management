@@ -1,5 +1,6 @@
 @include('partials._styles')
 <body>
+
   <!-- <div class="container-scroller"> -->
       @include('partials._header')
       @include('partials._sidebar')
@@ -89,24 +90,156 @@
         </div>
         @include('partials._footer')
         <script>
+
+          const dvdTable = document.getElementById('dvdTable');
+          const dvdId = document.getElementById('dvdId');
+          const dvdName = document.getElementById('name');
+          const dvdDesc = document.getElementById('desc');
+
+          document.addEventListener('DOMContentLoaded', function () {
+            
+            dvdTable.addEventListener('click', async function (event) {
+
+              const clickedElement = event.target;
+              const row = clickedElement.closest('tr');
+
+            if (clickedElement.classList.contains('editButton')) {
+
+                const dvdId = row.getAttribute('data-id');
+
+                try {
+
+                    const dvdData = await fetchDvdData(dvdId);
+
+                    dvdName.value = dvdData.name;
+                    dvdDesc.value = dvdData.description;
+                    dvdId.value = dvdId;
+
+                } catch (error) {
+                    console.error('An error occurred:', error);
+                }
+            }
+        
+          });
+
+          const scrollButton = document.querySelector('.scrollButton');
+
+            scrollButton.addEventListener('click', function () {
+                clearInputFields();
+            });
+
+        });
+
+        async function fetchDvdData(dvdId) {
+            try {
+                const response = await fetch(`/dvd/edit/${dvdId}`);
+
+                if (response.ok) {
+                    const magazineData = await response.json();
+                    return magazineData;
+                } else {
+                    throw new Error('Failed to fetch book data');
+                }
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        function clearInputFields() {
+          dvdName.value = '';
+          dvdDesc.value = '';
+          dvdId.value = '';
+
+        }
+
+        // Delete button click event
         document.addEventListener('DOMContentLoaded', function () {
-          const searchInput = document.getElementById('searchInput');
-          const tableRows = document.querySelectorAll('#dvdTable tbody tr');
 
-          searchInput.addEventListener('input', function () {
-              const searchTerm = searchInput.value.trim().toLowerCase();
+          const deleteButtons = document.querySelectorAll('.deleteButton');
 
-              tableRows.forEach(row => {
-                  const rowData = row.textContent.toLowerCase();
+          deleteButtons.forEach(button => {
+              button.addEventListener('click', function () {
+                  const dvdId = this.getAttribute('data-id');
 
-                  if (rowData.includes(searchTerm)) {
-                      row.style.display = '';
-                  } else {
-                      row.style.display = 'none';
+                  Swal.fire({
+                      title: 'Are you sure?',
+                      text: 'You won\'t be able to revert this!',
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Yes, delete it!'
+                  }).then((result) => {
+                      if (result.isConfirmed) {
+                          // Perform delete action
+                          deleteDvd(dvdId);
+                      }
+                });
+           });
+        });
+
+        async function deleteDvd(dvdId) {
+          try {
+              const response = await fetch(`/dvd/delete/${dvdId}`, {
+                  method: 'DELETE',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                   }
               });
-          });
+              
+              const data = await response.json();
+              // Handle the response and possibly remove the row from the table
+              if (response.ok) {
+                  Swal.fire({
+                      icon: 'success',
+                      title: data.message,
+                      toast: true,
+                      position: 'top-end', // Position the toast notification at the top-right corner
+                      showConfirmButton: false,
+                      timer: 5000 // Display for 5 seconds
+                  });
+                  // Remove the deleted row from the table
+                  const row = document.querySelector(`tr[data-id="${dvdId}"]`);
+                  if (row) {
+                      row.remove();
+                  }
+              } else {
+                Swal.fire({
+                      icon: 'error',
+                      title: data.message,
+                      toast: true,
+                      position: 'top-end', // Position the toast notification at the top-right corner
+                      showConfirmButton: false,
+                      timer: 5000 // Display for 5 seconds
+                  });
+              }
+            } catch (error) {
+              console.error('An error occurred:', error);
+            }
+          }
         });
+
+          document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const tableRows = document.querySelectorAll('#dvdTable tbody tr');
+
+            searchInput.addEventListener('input', function () {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+
+                tableRows.forEach(row => {
+                    const rowData = row.textContent.toLowerCase();
+
+                    if (rowData.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+          });
+
+
         </script>
         @include('partials._script')
         @if ($errors->any())

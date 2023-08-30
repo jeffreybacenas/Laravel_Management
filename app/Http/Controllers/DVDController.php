@@ -18,7 +18,7 @@ class DVDController extends Controller
     
     public function store(Request $request)
     {
-        if($request->bookID == null){
+        if($request->dvdId == null){
 
             $data = $request->validate([
                 'name' => 'required|unique:dvds'
@@ -34,18 +34,16 @@ class DVDController extends Controller
         }else{
 
             $data = $request->validate([
-                'title' => 'required|unique:books,title,' .$request->bookID,
+                'name' => 'required|unique:dvds,'. $request->dvdId,
             ]);
 
-            $book = Book::find($request->bookID);
+            $dvd = Dvd::find($request->dvdId);
 
-            $book->title = $data['title'];
-            $book->description = $request->description;
-            $book->author = $request->author;
-            $book->publishdate = $request->publishDate;
-            $book->save();
+            $dvd->name = $data['name'];
+            $dvd->description = $request->dvdDesc;
+            $dvd->save();
             
-            Session::flash('success', 'Book updated successfully');
+            Session::flash('success', 'DVD updated successfully');
 
 
         }
@@ -56,9 +54,9 @@ class DVDController extends Controller
 
     public function edit($id)
     {
-        $book = Book::findOrFail($id);
+        $dvd = Dvd::findOrFail($id);
 
-        return new JsonResponse($book);
+        return new JsonResponse($dvd);
     }
 
     public function delete($id)

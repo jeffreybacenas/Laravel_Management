@@ -18,6 +18,7 @@ class BooksController extends Controller
     public function store(Request $request)
     {
         if($request->bookID == null){
+            
             $data = $request->validate([
                 'title' => 'required|unique:books'
             ]);
