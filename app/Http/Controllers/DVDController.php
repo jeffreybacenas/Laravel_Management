@@ -45,7 +45,6 @@ class DVDController extends Controller
             
             Session::flash('success', 'DVD updated successfully');
 
-
         }
         
         return redirect()->route('dvd');
@@ -61,15 +60,15 @@ class DVDController extends Controller
 
     public function delete($id)
     {
-        $book = Book::find($id);
+        $dvd = Dvd::find($id);
 
-        if (!$book) {
-            return response()->json(['message' => 'Book not found'], 404);
+        if (!$dvd) {
+            return response()->json(['message' => 'DVD not found'], 404);
         }
 
-        $book->delete();
-        Session::flash('success', 'Book deleted successfully');
-        return response()->json(['message' => 'Book deleted successfully'], 200);
+        $dvd->delete();
+        Session::flash('success', 'DVD deleted successfully');
+        return response()->json(['message' => 'DVD deleted successfully'], 200);
 
     }
 }
