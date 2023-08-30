@@ -58,38 +58,40 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title text-center">User Information</h4><hr>
-                  <form class="forms-sample">
+                  <form action="{{ route('user.store') }}" method="POST" class="forms-sample">
+                  @crsf
+                  <input type="text" name="userID" id="userID" hidden>
                   <div class="form-group">
                     <div class="row">
                       <div class="col">
-                        <label for="exampleInputFirstName">First Name</label>
-                        <input type="text" class="form-control" id="exampleInputFirstName" placeholder="First Name">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name">
                       </div>
                       <div class="col">
                         <label for="exampleInputMiddleName">Middle Name</label>
-                        <input type="text" class="form-control" id="exampleInputMiddleName" placeholder="Middle Name">
+                        <input type="text" class="form-control" id="mname" name="mname" placeholder="Middle Name">
                       </div>
                       <div class="col">
                         <label for="exampleInputLastName">Last Name</label>
-                        <input type="text" class="form-control" id="exampleInputLastName" placeholder="Last Name">
+                        <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name">
                       </div>
                     </div>
                   </div>
 
                   <div class="form-group">
                       <label for="exampleInputPassword1">Email</label>
-                      <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
+                      <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                     </div>
 
                     <div class="form-group">
                      <div class="row">
                       <div class="col">
                           <label for="exampleInputFirstName">Password</label>
-                          <input type="text" class="form-control" id="exampleInputFirstName" placeholder="Password">
+                          <input type="text" class="form-control" id="password" name="password" placeholder="Password">
                       </div>
                       <div class="col">
                           <label for="exampleInputFirstName">Confirm Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+                          <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password">
                       </div>
                      </div>
                     </div><br>
