@@ -38,7 +38,7 @@ class UserController extends Controller
 
             Session::flash('success', 'User inserted successfully');
 
-        }else{
+        } else {
 
             $data = $request->validate([
                 'name' => 'required|unique:categories,name,' .$request->catID,

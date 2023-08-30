@@ -15,7 +15,7 @@
                    <button class="btn btn-primary scrollButton">Add User</button>
                   </div>
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="userTable">
                       <thead>
                         <tr>
                           <th> User ID</th>
@@ -105,6 +105,72 @@
           </div>
         </div>
         @include('partials._footer')
+        <script>
+          const userTable = document.getElementById('userTable');
+          const userID = document.getElementById('userID');
+          const fname = document.getElementById('fname');
+          const mname = document.getElementById('mname');
+          const lname = document.getElementById('lname');
+          const email = document.getElementById('email');
+
+          document.addEventListener('DOMContentLoaded', function () {
+            
+            userTable.addEventListener('click', async function (event) {
+
+              const clickedElement = event.target;
+              const row = clickedElement.closest('tr');
+
+            if (clickedElement.classList.contains('editButton')) {
+
+                const userId = row.getAttribute('data-id');
+                try {
+                    const bookData = await fetchBookData(userId);
+
+                    bookTitleInput.value = bookData.title;
+                    bookDescInput.value = bookData.description;
+                    bookAuthorInput.value = bookData.author;
+                    bookPubDateInput.value = bookData.publishdate;
+                    bookID.value = userId;
+                    
+                } catch (error) {
+                    console.error('An error occurred:', error);
+                }
+            }
+        
+          });
+
+          const scrollButton = document.querySelector('.scrollButton');
+
+            scrollButton.addEventListener('click', function () {
+                clearInputFields();
+            });
+
+        });
+
+        async function fetchBookData(bookId) {
+            try {
+                const response = await fetch(`/books/edit/${bookId}`);
+
+                if (response.ok) {
+                    const bookData = await response.json();
+                    return bookData;
+                } else {
+                    throw new Error('Failed to fetch book data');
+                }
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        function clearInputFields() {
+          bookTitleInput.value = '';
+          bookDescInput.value = '';
+          bookAuthorInput.value = '';
+          bookPubDateInput.value = '';
+          bookID.value = '';
+
+        }
+        </script>  
         @include('partials._script')
         @if ($errors->any())
           @foreach ($errors->all() as $error)
