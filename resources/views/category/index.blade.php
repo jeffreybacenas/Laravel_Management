@@ -35,27 +35,27 @@
                         </tr>
                       </thead>
                       <tbody>
-                            @forelse($categories as $category)
-                            <tr data-id="{{ $category->id }}">
-                                <td>{{ $category->id }}</td>
-                                <td>{{ $category->name }}</td>
-                                <td style="color: {{ $category->description ? 'inherit' : 'blue' }};">{{ $category->description ? $category->description : 'N/A' }}</td>
-                                <td style="color: {{ $category->created_at ? 'inherit' : 'blue' }};">{{ $category->created_at ? \Carbon\Carbon::parse($category->created_at)->format('M d, Y') : 'N/A' }}</td>
-                                <td style="color: {{ $category->updated_at ? 'inherit' : 'blue' }};">{{ $category->updated_at ? \Carbon\Carbon::parse($category->updated_at)->format('M d, Y') : 'N/A' }}</td>
-                                <td>
-                                    <a class="btn btn-sm btn-primary scrollButton editButton">
-                                        <i class="mdi mdi-pencil"></i> Edit
-                                    </a>
-                                    <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $category->id }}">
-                                      <i class="mdi mdi-delete"></i> Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="6" class="text-center">No records found.</td>
-                            </tr>
-                            @endforelse
+                        @forelse($categories as $category)
+                        <tr data-id="{{ $category->id }}">
+                            <td>{{ $category->id }}</td>
+                            <td>{{ $category->name }}</td>
+                            <td style="color: {{ $category->description ? 'inherit' : 'blue' }};">{{ $category->description ? $category->description : 'N/A' }}</td>
+                            <td style="color: {{ $category->created_at ? 'inherit' : 'blue' }};">{{ $category->created_at ? \Carbon\Carbon::parse($category->created_at)->format('M d, Y') : 'N/A' }}</td>
+                            <td style="color: {{ $category->updated_at ? 'inherit' : 'blue' }};">{{ $category->updated_at ? \Carbon\Carbon::parse($category->updated_at)->format('M d, Y') : 'N/A' }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary scrollButton editButton">
+                                    <i class="mdi mdi-pencil"></i> Edit
+                                </a>
+                                <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $category->id }}">
+                                  <i class="mdi mdi-delete"></i> Delete
+                                </button>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="6" class="text-center">No records found.</td>
+                        </tr>
+                        @endforelse
                         </tbody>
                     </table>
                   </div>
