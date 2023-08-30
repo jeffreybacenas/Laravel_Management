@@ -92,7 +92,7 @@
         <script>
 
           const dvdTable = document.getElementById('dvdTable');
-          const dvdId = document.getElementById('dvdId');
+          const dvdID = document.getElementById('dvdId');
           const dvdName = document.getElementById('name');
           const dvdDesc = document.getElementById('desc');
 
@@ -113,7 +113,7 @@
 
                     dvdName.value = dvdData.name;
                     dvdDesc.value = dvdData.description;
-                    dvdId.value = dvdId;
+                    dvdID.value = dvdId;
 
                 } catch (error) {
                     console.error('An error occurred:', error);

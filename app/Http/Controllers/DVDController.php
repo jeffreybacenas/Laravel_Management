@@ -34,7 +34,7 @@ class DVDController extends Controller
         }else{
 
             $data = $request->validate([
-                'name' => 'required|unique:dvds,'. $request->dvdId,
+                'name' => 'required|unique:dvds,name,'. $request->dvdId,
             ]);
 
             $dvd = Dvd::find($request->dvdId);
