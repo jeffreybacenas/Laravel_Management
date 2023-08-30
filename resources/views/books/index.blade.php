@@ -110,7 +110,7 @@
         @include('partials._footer')
 
         <script>
-
+          
           const booksTable = document.getElementById('booksTable');
           const bookID = document.getElementById('bookID');
           const bookTitleInput = document.getElementById('bookTitleInput');
