@@ -60,7 +60,6 @@
                   <h4 class="card-title text-center">Category Information</h4><hr>
                   <form action="{{ route('category.store') }}" method="POST" class="forms-sample">
                   @csrf
-
                     <input type="text" name="catID" id="catID" hidden>
                     <div class="form-group">
                         <label for="exampleInputFirstName">Category Name</label>

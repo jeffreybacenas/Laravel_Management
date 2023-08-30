@@ -33,19 +33,16 @@ class CategoryController extends Controller
         }else{
 
             $data = $request->validate([
-                'title' => 'required|unique:books,title,' .$request->bookID,
+                'name' => 'required|unique:categories,name,' .$request->catID,
             ]);
 
-            $book = Book::find($request->bookID);
+            $category = Category::find($request->catID);
 
-            $book->title = $data['title'];
-            $book->description = $request->description;
-            $book->author = $request->author;
-            $book->publishdate = $request->publishDate;
-            $book->save();
+            $category->name = $data['name'];
+            $category->description = $request->desc;
+            $category->save();
             
-            Session::flash('success', 'Book updated successfully');
-
+            Session::flash('success', 'Category updated successfully');
 
         }
         
