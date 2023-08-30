@@ -30,7 +30,7 @@ class UserController extends Controller
             ]);
     
             $user = new User();
-            $user->name = $data['fname'] . ' ' . $data['lname']; 
+            $user->name = $data['fname'] . ' ' . $request->mname  . '  ' . $data['lname']; 
             $user->email = $data['email'];
             $user->role_id = 1;
             $user->password = bcrypt($data['password']);
