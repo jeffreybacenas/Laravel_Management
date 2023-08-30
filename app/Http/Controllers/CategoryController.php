@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
@@ -49,5 +50,12 @@ class CategoryController extends Controller
         }
         
         return redirect()->route('category');
+    }
+
+    public function edit($id)
+    {
+        $category = Category::find($id);
+
+        return new JsonResponse($category);
     }
 }

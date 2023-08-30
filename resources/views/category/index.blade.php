@@ -15,7 +15,7 @@
                    <button class="btn btn-primary scrollButton">Add Category</button>
                   </div>
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="categoryTable">
                       <thead>
                         <tr>
                           <th> Category ID</th>
@@ -82,6 +82,65 @@
           </div>
         </div>
         @include('partials._footer')
+        <script>
+
+          const categoryTable = document.getElementById('categoryTable');
+          const catID = document.getElementById('catID');
+          const categoryName = document.getElementById('categoryName');
+          const desc = document.getElementById('desc');
+
+          document.addEventListener('DOMContentLoaded', function () {
+            
+            categoryTable.addEventListener('click', async function (event) {
+
+              const clickedElement = event.target;
+              const row = clickedElement.closest('tr');
+
+            if (clickedElement.classList.contains('editButton')) {
+
+                const catId = row.getAttribute('data-id');
+                try {
+                    const CatData = await fetchCatData(catId);
+                    categoryName.value = CatData.name;
+                    desc.value = CatData.description;
+                    catID.value = catId;
+                } catch (error) {
+                    console.error('An error occurred:', error);
+                }
+            }
+        
+          });
+
+          const scrollButton = document.querySelector('.scrollButton');
+
+            scrollButton.addEventListener('click', function () {
+                clearInputFields();
+            });
+
+        });
+
+        async function fetchCatData(catId) {
+            try {
+                const response = await fetch(`/category/edit/${catId}`);
+
+                if (response.ok) {
+                    const CatData = await response.json();
+                    return CatData;
+                } else {
+                    throw new Error('Failed to fetch book data');
+                }
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        function clearInputFields() {
+          categoryName.value = '';
+          desc.value = '';
+          catID.value = '';
+
+        }
+        </script>  
         @include('partials._script')
         @if ($errors->any())
           @foreach ($errors->all() as $error)
