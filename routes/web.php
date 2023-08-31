@@ -69,6 +69,8 @@ Route::middleware('auth')->group(function () {
     Route::controller(UserController::class)->group(function (){
         Route::get('/user', 'index')->name('user');
         Route::post('/user/store', 'store')->name('user.store');
+        Route::get('/user/edit/{id}', 'edit')->name('user.edit');
+        Route::delete('/user/delete/{id}', 'delete')->name('user.delete');
     });
     
     Route::controller(CatalogController::class)->group(function (){
