@@ -16,6 +16,12 @@
                    <button class="btn btn-primary scrollButton">Add borrow</button>
                  </div>
                   <div class="table-responsive">
+                  <div class="table-controls d-flex text-center">
+                      <div class="search-container ml-auto"> <!-- Add ml-auto to align to the right -->
+                          <label for="searchInput" class="search-label">Search:</label>
+                          <input type="text" id="searchInput" class="form-control form-control-sm search-input">
+                      </div>
+                    </div>
                     <table class="table table-striped">
                       <thead>
                         <tr>
