@@ -156,7 +156,16 @@ const booksTable = document.getElementById('booksTable');
                 throw error;
             }
         }
-        
+
+        function clearInputFields() {
+          bookTitleInput.value = '';
+          bookDescInput.value = '';
+          bookAuthorInput.value = '';
+          bookPubDateInput.value = '';
+          bookID.value = '';
+
+        }
+
           document.addEventListener('DOMContentLoaded', function () {
       const searchInput = document.getElementById('searchInput');
       const tableRows = document.querySelectorAll('#booksTable tbody tr');
