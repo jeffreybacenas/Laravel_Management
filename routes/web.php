@@ -86,19 +86,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/bookandreturn/edit/{id}', 'edit')->name('bookandreturn.edit');
         Route::delete('/bookandreturn/delete/{id}', 'delete')->name('bookandreturn.delete');
     });
-    
-    
 
-    
     Route::controller(SystemLogsController::class)->group(function (){
         Route::get('/systemlogs', 'index')->name('systemlogs');
-        Route::post('/systemlogs/store', 'store')->name('systemlogs.store');
-        Route::get('/systemlogs/edit/{id}', 'edit')->name('systemlogs.edit');
-        Route::delete('/systemlogs/delete/{id}', 'delete')->name('systemlogs.delete');
     });
 
     Route::controller(ReportController::class)->group(function (){
         Route::get('/reports', 'index')->name('reports');
+        Route::get('/reports/excel', 'excel')->name('reports.excel');
+        Route::get('/reports/pdf', 'pdf')->name('reports.pdf');
     });
 
 });
