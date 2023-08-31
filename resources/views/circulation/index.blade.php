@@ -102,6 +102,61 @@
         </div>
         @include('partials._footer')
         <script>
+
+const booksTable = document.getElementById('booksTable');
+          const bookID = document.getElementById('bookID');
+          const bookTitleInput = document.getElementById('bookTitleInput');
+          const bookDescInput = document.getElementById('bookDescInput');
+          const bookAuthorInput = document.getElementById('bookAuthorInput');
+          const bookPubDateInput = document.getElementById('bookPubDateInput');
+
+          document.addEventListener('DOMContentLoaded', function () {
+            
+            booksTable.addEventListener('click', async function (event) {
+
+              const clickedElement = event.target;
+              const row = clickedElement.closest('tr');
+
+            if (clickedElement.classList.contains('editButton')) {
+
+                const bookId = row.getAttribute('data-id');
+                try {
+                    const bookData = await fetchBookData(bookId);
+                    bookTitleInput.value = bookData.title;
+                    bookDescInput.value = bookData.description;
+                    bookAuthorInput.value = bookData.author;
+                    bookPubDateInput.value = bookData.publishdate;
+                    bookID.value = bookId;
+                } catch (error) {
+                    console.error('An error occurred:', error);
+                }
+            }
+        
+          });
+
+          const scrollButton = document.querySelector('.scrollButton');
+
+            scrollButton.addEventListener('click', function () {
+                clearInputFields();
+            });
+
+        });
+
+        async function fetchBookData(bookId) {
+            try {
+                const response = await fetch(`/books/edit/${bookId}`);
+
+                if (response.ok) {
+                    const bookData = await response.json();
+                    return bookData;
+                } else {
+                    throw new Error('Failed to fetch book data');
+                }
+            } catch (error) {
+                throw error;
+            }
+        }
+        
           document.addEventListener('DOMContentLoaded', function () {
       const searchInput = document.getElementById('searchInput');
       const tableRows = document.querySelectorAll('#booksTable tbody tr');
