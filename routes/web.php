@@ -82,6 +82,9 @@ Route::middleware('auth')->group(function () {
     
     Route::controller(CirculationController::class)->group(function (){
         Route::get('/bookandreturn', 'index')->name('bookandreturn');
+        Route::post('/bookandreturn/store', 'store')->name('bookandreturn.store');
+        Route::get('/bookandreturn/edit/{id}', 'edit')->name('bookandreturn.edit');
+        Route::delete('/bookandreturn/delete/{id}', 'delete')->name('bookandreturn.delete');
     });
     
     
