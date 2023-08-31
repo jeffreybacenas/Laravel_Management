@@ -75,6 +75,9 @@ Route::middleware('auth')->group(function () {
     
     Route::controller(CatalogController::class)->group(function (){
         Route::get('/catalog', 'index')->name('catalog');
+        Route::post('/catalog/store', 'store')->name('catalog.store');
+        Route::get('/catalog/edit/{id}', 'edit')->name('catalog.edit');
+        Route::delete('/catalog/delete/{id}', 'delete')->name('catalog.delete');
     });
     
     Route::controller(CirculationController::class)->group(function (){
