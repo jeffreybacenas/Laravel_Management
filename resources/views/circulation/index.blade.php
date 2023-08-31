@@ -63,7 +63,8 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title text-center">Books And Returns Information</h4><hr>
-                  <form class="forms-sample">
+                  <form action="{{ route ('bookandreturn.store') }}" method="POST" class="forms-sample">
+                   @csrf
 
                    <div class="form-group">
                       <label for="bookSelection">Select a Book: </label>
