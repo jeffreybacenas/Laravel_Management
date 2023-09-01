@@ -32,28 +32,18 @@
                           <th>Action</th>
                       </tr>
                      </thead>
-                    @forelse($catalogs as $user)
-                        <tr data-id="{{ $user->id }}">
-                            <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email  }}</td>
-                            <td>{{  \Carbon\Carbon::parse($user->created_at)->format('M d, Y')  }}</td>
-                            <td >{{ \Carbon\Carbon::parse($user->updated_at)->format('M d, Y') }}</td>
-                            <td>
-
-                                <a class="btn btn-sm btn-primary scrollButton editButton">
-                                    <i class="mdi mdi-pencil"></i> Edit
-                                </a>
-
-                                <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $user->id }}">
-                                  <i class="mdi mdi-delete"></i> Delete
-                                </button>
-
-                            </td>
+                    @forelse($catalogs as $catalog)
+                        <tr data-id="{{ $catalog->id }}">
+                            <td>{{ $catalog->id }}</td>
+                            <td>{{ $catalog->$catalog }}</td>
+                            <td>{{ $catalog->description  }}</td>
+                            <td>{{  \Carbon\Carbon::parse($catalog->created_at)->format('M d, Y')  }}</td>
+                            <td >{{ \Carbon\Carbon::parse($catalog->updated_at)->format('M d, Y') }}</td>
+                            
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="text-center">No records found.</td>
+                            <td colspan="5" class="text-center">No records found.</td>
                         </tr>
                         @endforelse 
                       </tbody>
