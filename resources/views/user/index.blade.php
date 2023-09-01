@@ -124,13 +124,13 @@
 
                 const userId = row.getAttribute('data-id');
                 try {
-                    const bookData = await fetchBookData(userId);
+                    const userData = await fetchUserData(userId);
 
-                    bookTitleInput.value = bookData.title;
-                    bookDescInput.value = bookData.description;
-                    bookAuthorInput.value = bookData.author;
-                    bookPubDateInput.value = bookData.publishdate;
-                    bookID.value = userId;
+                    fname.value = userData.fname;
+                    mname.value = userData.mname;
+                    lname.value = userData.lname;
+                    email.value = userData.email;
+                    userID.value = userId;
                     
                 } catch (error) {
                     console.error('An error occurred:', error);
@@ -147,13 +147,13 @@
 
         });
 
-        async function fetchBookData(bookId) {
+        async function fetchUserData(userId) {
             try {
-                const response = await fetch(`/books/edit/${bookId}`);
+                const response = await fetch(`/user/edit/${userId}`);
 
                 if (response.ok) {
-                    const bookData = await response.json();
-                    return bookData;
+                    const userData = await response.json();
+                    return userData;
                 } else {
                     throw new Error('Failed to fetch book data');
                 }

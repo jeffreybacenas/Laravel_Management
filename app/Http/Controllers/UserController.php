@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -62,5 +63,12 @@ class UserController extends Controller
         }
         
         return redirect()->route('user');
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+
+        return new JsonResponse($user);
     }
 }
