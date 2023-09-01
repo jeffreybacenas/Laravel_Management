@@ -32,4 +32,10 @@ class CatalogController extends Controller
         $catalog->save();
     }
 
+    public function delete($id)
+    {
+        $catalog = Catalog::where('resource_id', $id)->first();
+        $catalog->delete();
+    }
+
 }

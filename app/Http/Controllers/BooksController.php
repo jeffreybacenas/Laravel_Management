@@ -85,7 +85,11 @@ class BooksController extends Controller
 
         $book->delete();
         Session::flash('success', 'Book deleted successfully');
+        
+        $this->catalogController->delete($id);
+
         return response()->json(['message' => 'Book deleted successfully'], 200);
+
     }
 
 }
