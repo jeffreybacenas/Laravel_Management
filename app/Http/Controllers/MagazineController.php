@@ -15,7 +15,7 @@ class MagazineController extends Controller
     {
         $this->catalogController = $catalogController;
     }
-    
+
     public function index()
     {
         $magazines = Magazine::All();
@@ -32,10 +32,14 @@ class MagazineController extends Controller
 
             $magazine = new Magazine;
             $magazine->name = $data['name'];
-            $magazine->description = $request->magazineDesc;
+            $magazine->description = $request['magazineDesc'];
             $magazine->save();
 
             Session::flash('success', 'Magazine inserted successfully');
+
+            $magazineId = Magazine::max('id');
+
+            $this->catalogController->store($data['name'], $request['magazineDesc'], $magazineId);
 
         }else{
             
@@ -43,14 +47,15 @@ class MagazineController extends Controller
                 'name' => 'required|unique:magazines,name,' . $request->magazineId,
             ]);
 
-            $magazine = Magazine::find($request->magazineId);
+            $magazine = Magazine::find($request['magazineId']);
 
             $magazine->name = $data['name'];
-            $magazine->description = $request->magazineDesc;
+            $magazine->description = $request['magazineDesc'];
             $magazine->save();
             
             Session::flash('success', 'Magazine updated successfully');
 
+            $this->catalogController->update($data['name'], $request['magazineDesc'], $request['magazineId']);
         }
         
         return redirect()->route('magazines');
