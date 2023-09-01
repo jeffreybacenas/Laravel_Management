@@ -79,6 +79,9 @@ class MagazineController extends Controller
 
         $magazine->delete();
         Session::flash('success', 'Magazine deleted successfully');
+
+        $this->catalogController->delete($id);
+
         return response()->json(['message' => 'Magazine deleted successfully'], 200);
 
     }
