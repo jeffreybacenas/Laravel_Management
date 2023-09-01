@@ -30,9 +30,10 @@ class UserController extends Controller
             ]);
     
             $user = new User();
-            $user->name = $data['fname'] . ' ' . $request->mname  . '  ' . $data['lname']; 
+            $user->fname = ucfirst(strtolower($data['fname']));
+            $user->mname = ucfirst(strtolower($request['mname']));
+            $user->lname = ucfirst(strtolower($data['lname']));
             $user->email = $data['email'];
-            $user->role_id = 1;
             $user->password = bcrypt($data['password']);
             $user->save();
 
@@ -41,16 +42,22 @@ class UserController extends Controller
         } else {
 
             $data = $request->validate([
-                'name' => 'required|unique:categories,name,' .$request->catID,
+                'fname' => 'required',
+                'lname' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:3|confirmed',
             ]);
 
-            $category = Category::find($request->catID);
+            $user = User::find($request->userID);
 
-            $category->name = $data['name'];
-            $category->description = $request->desc;
-            $category->save();
+            $user->fname = ucfirst(strtolower($data['fname']));
+            $user->mname = ucfirst(strtolower($request['mname']));
+            $user->lname = ucfirst(strtolower($data['lname']));
+            $user->email = $data['email'];
+            $user->password = bcrypt($data['password']);
+            $user->save();
             
-            Session::flash('success', 'Category updated successfully');
+            Session::flash('success', 'User updated successfully');
 
         }
         

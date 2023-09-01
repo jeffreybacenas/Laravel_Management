@@ -30,7 +30,7 @@
                         @forelse($users as $user)
                         <tr data-id="{{ $user->id }}">
                             <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->fname . ' ' . $user->mname . ' ' . $user->lname }}</td>
                             <td>{{ $user->email  }}</td>
                             <td>{{  \Carbon\Carbon::parse($user->created_at)->format('M d, Y')  }}</td>
                             <td >{{ \Carbon\Carbon::parse($user->updated_at)->format('M d, Y') }}</td>
