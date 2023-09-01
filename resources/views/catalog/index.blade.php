@@ -23,7 +23,16 @@
                 
                   <div class="table-responsive">
                     <table class="table table-striped">
-                    @forelse($users as $user)
+                    <thead>
+                      <tr>
+                          <th>Title</th>
+                          <th>Description</th>
+                          <th>Author</th>
+                          <th>Date Publish</th>
+                          <th>Action</th>
+                      </tr>
+                     </thead>
+                    @forelse($catalogs as $user)
                         <tr data-id="{{ $user->id }}">
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
@@ -31,12 +40,15 @@
                             <td>{{  \Carbon\Carbon::parse($user->created_at)->format('M d, Y')  }}</td>
                             <td >{{ \Carbon\Carbon::parse($user->updated_at)->format('M d, Y') }}</td>
                             <td>
+
                                 <a class="btn btn-sm btn-primary scrollButton editButton">
                                     <i class="mdi mdi-pencil"></i> Edit
                                 </a>
+
                                 <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $user->id }}">
                                   <i class="mdi mdi-delete"></i> Delete
                                 </button>
+
                             </td>
                         </tr>
                         @empty

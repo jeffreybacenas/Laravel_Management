@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Catalog;
 
-class CatalogController extends Controller
+class CatalogController extends Controller  
 {
     public function index()
     {
-        return view('catalog.index');
+        $catalogs = Catalog::All();
+        return view('catalog.index', compact('catalogs'));
     }
 }
