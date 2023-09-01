@@ -50,7 +50,7 @@ class BooksController extends Controller
                 'title' => 'required|unique:books,title,' .$request->bookID,
             ]);
 
-            $book = Book::find($request->bookID);
+            $book = Book::find($request['bookID']);
 
             $book->title = $data['title'];
             $book->description = $request['description'];
@@ -60,7 +60,7 @@ class BooksController extends Controller
             
             Session::flash('success', 'Book updated successfully');
 
-            $this->catalogController->update($data['title'], $request['description'], $request->bookID);
+            $this->catalogController->update($data['title'], $request['description'], $request['bookID']);
 
         }
         

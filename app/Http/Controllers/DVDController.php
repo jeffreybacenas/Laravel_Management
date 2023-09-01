@@ -41,13 +41,15 @@ class DVDController extends Controller
                 'name' => 'required|unique:dvds,name,'. $request->dvdId,
             ]);
 
-            $dvd = Dvd::find($request->dvdId);
+            $dvd = Dvd::find($request['dvdId']);
 
             $dvd->name = $data['name'];
-            $dvd->description = $request->dvdDesc;
+            $dvd->description = $request['dvdDesc'];
             $dvd->save();
             
             Session::flash('success', 'DVD updated successfully');
+            
+            $this->catalogController->update($data['name'], $request['dvdDesc'], $request['dvdId']);
 
         }
         
