@@ -15,7 +15,7 @@ class DVDController extends Controller
     {
         $this->catalogController = $catalogController;
     }
-    
+
     public function index()
     {
         $dvds = Dvd::All();
@@ -81,6 +81,9 @@ class DVDController extends Controller
 
         $dvd->delete();
         Session::flash('success', 'DVD deleted successfully');
+
+        $this->catalogController->delete($id);
+
         return response()->json(['message' => 'DVD deleted successfully'], 200);
 
     }
