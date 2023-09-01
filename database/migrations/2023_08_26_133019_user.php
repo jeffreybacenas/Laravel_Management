@@ -17,13 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('image')->nullable();
-            $table->unsignedBigInteger('role_id')->nullable(); // Add the role_id column
             $table->rememberToken();
             $table->timestamps();
-
-            // Add the foreign key constraint
-            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
