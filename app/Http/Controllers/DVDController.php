@@ -26,10 +26,14 @@ class DVDController extends Controller
 
             $dvd = new Dvd;
             $dvd->name = $data['name'];
-            $dvd->description = $request->dvdDesc;
+            $dvd->description = $request['dvdDesc'];
             $dvd->save();
 
             Session::flash('success', 'DVD inserted successfully');
+
+            $dvdId = Dvd::max('id');
+
+            $this->catalogController->store($data['name'], $request['dvdDesc'], $dvdId);
 
         }else{
 

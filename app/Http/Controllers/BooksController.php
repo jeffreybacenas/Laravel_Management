@@ -53,9 +53,9 @@ class BooksController extends Controller
             $book = Book::find($request->bookID);
 
             $book->title = $data['title'];
-            $book->description = $request->description;
-            $book->author = $request->author;
-            $book->publishdate = $request->publishDate;
+            $book->description = $request['description'];
+            $book->author = $request['author'];
+            $book->publishdate = $request['publishDate'];
             $book->save();
             
             Session::flash('success', 'Book updated successfully');
