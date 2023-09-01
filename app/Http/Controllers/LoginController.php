@@ -51,9 +51,9 @@ class LoginController extends Controller
         ]);
 
         $user = new User();
-        $user->fname = $data['fname'];
-        $user->mname = $request['fname'];
-        $user->lname = $data['lname'];
+        $user->fname = ucfirst(strtolower($data['fname']));
+        $user->mname = ucfirst(strtolower($request['fname']));
+        $user->lname = ucfirst(strtolower($data['lname']));
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
         $user->save();
