@@ -9,6 +9,13 @@ use App\Models\Magazine;
 
 class MagazineController extends Controller
 {
+    protected $catalogController;
+
+    public function __construct(CatalogController $catalogController)
+    {
+        $this->catalogController = $catalogController;
+    }
+    
     public function index()
     {
         $magazines = Magazine::All();
