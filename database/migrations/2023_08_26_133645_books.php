@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Add the foreign key constraint
-            $table->foreign('category_id')->references('id')->on('category');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

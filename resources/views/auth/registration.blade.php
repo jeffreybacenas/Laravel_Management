@@ -15,11 +15,15 @@
               <form action="{{ route('registration.store') }}" method="POST" class="pt-3">
                @csrf
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" name="fname" value="{{ old('fname') }}" placeholder="FirstName">
+                  <input type="text" class="form-control form-control-lg" name="fname" value="{{ old('fname') }}" placeholder="First Name">
                 </div>
                 
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" name="lname" value="{{ old('lname') }}"  placeholder="LastName">
+                  <input type="text" class="form-control form-control-lg" name="mname" value="{{ old('mname') }}"  placeholder="Middle Name(optional)">
+                </div>
+                
+                <div class="form-group">
+                  <input type="text" class="form-control form-control-lg" name="lname" value="{{ old('lname') }}"  placeholder="Last Name">
                 </div>
                 
                 <div class="form-group">

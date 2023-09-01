@@ -25,9 +25,9 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
 
-            $userName = User::where('email', $credentials['email'])->First();
+            $userDetails = User::where('email', $credentials['email'])->First();
 
-            Session::flash('success', 'Welcome ' . $userName->name);
+            Session::flash('success', 'Welcome ' . $userDetails->fname . ' ' . $userDetails->mname . ' ' . $userDetails->lname);
             return redirect()->route('dashboard');
         } else {
             Session::flash('error', 'Invalid credentials');
@@ -51,9 +51,10 @@ class LoginController extends Controller
         ]);
 
         $user = new User();
-        $user->name = $data['fname'] . ' ' . $data['lname']; 
+        $user->fname = $data['fname'];
+        $user->mname = $request['fname'];
+        $user->lname = $data['lname'];
         $user->email = $data['email'];
-        $user->role_id = 1;
         $user->password = bcrypt($data['password']);
         $user->save();
 
