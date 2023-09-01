@@ -15,6 +15,14 @@
                    <button class="btn btn-primary scrollButton">Add User</button>
                   </div>
                   <div class="table-responsive">
+
+                  <div class="table-controls d-flex text-center">
+                      <div class="search-container ml-auto"> <!-- Add ml-auto to align to the right -->
+                          <label for="searchInput" class="search-label">Search:</label>
+                          <input type="text" id="searchInput" class="form-control form-control-sm search-input">
+                      </div>
+                    </div>
+
                     <table class="table table-striped" id="userTable">
                       <thead>
                         <tr>
@@ -236,8 +244,30 @@
             }
           }
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+          const searchInput = document.getElementById('searchInput');
+          const tableRows = document.querySelectorAll('#userTable tbody tr');
+
+          searchInput.addEventListener('input', function () {
+              const searchTerm = searchInput.value.trim().toLowerCase();
+
+              tableRows.forEach(row => {
+                  const rowData = row.textContent.toLowerCase();
+
+                  if (rowData.includes(searchTerm)) {
+                      row.style.display = '';
+                  } else {
+                      row.style.display = 'none';
+                  }
+              });
+          });
+        });
+
         </script>  
+
         @include('partials._script')
+
         @if ($errors->any())
           @foreach ($errors->all() as $error)
             <script>
