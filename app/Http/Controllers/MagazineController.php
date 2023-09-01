@@ -83,6 +83,5 @@ class MagazineController extends Controller
         $this->catalogController->delete($id);
 
         return response()->json(['message' => 'Magazine deleted successfully'], 200);
-
     }
 }

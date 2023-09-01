@@ -25,18 +25,22 @@
                     <table class="table table-striped">
                     <thead>
                       <tr>
-                          <th>Title</th>
+                          <th>ID</th>
                           <th>Description</th>
-                          <th>Author</th>
-                          <th>Date Publish</th>
-                          <th>Action</th>
+                          <th>Date Created</th>
+                          <th>Date Updated</th>
                       </tr>
                      </thead>
                     @forelse($catalogs as $catalog)
                         <tr data-id="{{ $catalog->id }}">
                             <td>{{ $catalog->id }}</td>
-                            <td>{{ $catalog->$catalog }}</td>
-                            <td>{{ $catalog->description  }}</td>
+                            <td>
+                              <span class="module">Module :</span>
+                              <span>{{ $catalog->catalog }}</span>
+                              <span class="info">Info:</span>
+                              <span>{{ $catalog->description }}</span>
+                            </td>
+
                             <td>{{  \Carbon\Carbon::parse($catalog->created_at)->format('M d, Y')  }}</td>
                             <td >{{ \Carbon\Carbon::parse($catalog->updated_at)->format('M d, Y') }}</td>
                             
