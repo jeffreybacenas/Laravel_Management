@@ -1,6 +1,26 @@
-@include('partials._styles')
+<!DOCTYPE html>
+<html lang="en">
 
-<body class="background-images">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="icon" type="image/x-icon" href="{{ asset('icon-library.png') }}">
+  <title> Laravel Management </title>
+
+  <style>
+    body{
+      background-image: url('bg-library.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style> 
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
+  
+</head>
+<body>
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-center auth px-0">
@@ -9,11 +29,11 @@
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
               <div class="text-center mt-5 fw-light ">
-                  <h3 class="text-primary">Library Software Login</h3> 
+                  <h3 class="text-primary">Library Management</h3> 
                 </div>
               </div>
               <form action="{{ route('performLogin')}}" method="POST" class="pt-3" >
-              @csrf
+                @csrf
                 <div class="form-group">
                   <input type="email" class="form-control form-control-lg" name="email" placeholder="Username">
                 </div>
