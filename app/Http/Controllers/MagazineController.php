@@ -39,7 +39,7 @@ class MagazineController extends Controller
 
             $magazineId = Magazine::max('id');
 
-            $this->catalogController->store($data['name'], $request['magazineDesc'], $magazineId);
+            $this->catalogController->store($data['name'], $request['magazineDesc'], 'Magazine' . $magazineId);
 
         }else{
             
@@ -55,7 +55,7 @@ class MagazineController extends Controller
             
             Session::flash('success', 'Magazine updated successfully');
 
-            $this->catalogController->update($data['name'], $request['magazineDesc'], $request['magazineId']);
+            $this->catalogController->update($data['name'], $request['magazineDesc'],'Magazine' . $request['magazineId']);
         }
         
         return redirect()->route('magazines');

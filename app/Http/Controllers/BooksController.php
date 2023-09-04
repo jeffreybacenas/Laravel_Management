@@ -25,7 +25,7 @@ class BooksController extends Controller
 
     public function store(Request $request)
     {
-        if($request->bookID == null){
+        if($request['bookID'] == null){
             
             $data = $request->validate([
                 'title' => 'required|unique:books'
@@ -42,12 +42,12 @@ class BooksController extends Controller
 
             $bookId = Book::max('id');
 
-            $this->catalogController->store($data['title'], $request['description'], $bookId);
+            $this->catalogController->store($data['title'], $request['description'], 'Book' . $bookId);
 
         }else{
 
             $data = $request->validate([
-                'title' => 'required|unique:books,title,' .$request->bookID,
+                'title' => 'required|unique:books,title,' .$request['bookID'],
             ]);
 
             $book = Book::find($request['bookID']);
@@ -60,7 +60,7 @@ class BooksController extends Controller
             
             Session::flash('success', 'Book updated successfully');
 
-            $this->catalogController->update($data['title'], $request['description'], $request['bookID']);
+            $this->catalogController->update($data['title'], $request['description'], 'Book' . $request['bookID']);
 
         }
         
@@ -89,7 +89,6 @@ class BooksController extends Controller
         $this->catalogController->delete($id);
 
         return response()->json(['message' => 'Book deleted successfully'], 200);
-
     }
 
 }

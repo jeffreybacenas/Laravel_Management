@@ -39,3 +39,10 @@
     color: blue;
     font-style: italic;
 }
+
+/* In your CSS file, e.g., styles.css */
+.background-image {
+    background-image: url('../../bg-library.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

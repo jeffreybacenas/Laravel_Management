@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="icon" type="image/x-icon" href="icon-library.png">
+  <link rel="icon" type="image/x-icon" href=" {{ asset('icon-library.png') }} ">
   <title>Laravel Library Software </title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="vendors/feather/feather.css">
@@ -21,8 +21,15 @@
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
-  <link rel="stylesheet" href="css/custom-style/custom.css">
+  <link rel="stylesheet" href=" {{ asset('css/custom-style/custom.css') }} ">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+  <style>
   
-
+  /* In your CSS file, e.g., styles.css */
+  .background-images {
+      background-image: url('bg-library.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+ </style> 
 </head>

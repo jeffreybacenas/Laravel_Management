@@ -10,7 +10,7 @@
         </div>
         <div>
           <a class="navbar-brand brand-logo" href="{{ route('dashboard') }}">
-            <h5>Library Software</h5>
+            <h5>Library Management  </h5>
           </a>
           <a class="navbar-brand brand-logo-mini" href="{{ route('dashboard') }}">
           </a>
@@ -38,7 +38,6 @@
                   <p class="fw-light text-muted mb-0">{{ Auth::user()->email }}</p>
                 @endauth
               </div>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
               <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="dropdown-item">

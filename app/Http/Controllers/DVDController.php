@@ -40,7 +40,7 @@ class DVDController extends Controller
 
             $dvdId = Dvd::max('id');
 
-            $this->catalogController->store($data['name'], $request['dvdDesc'], $dvdId);
+            $this->catalogController->store($data['name'], $request['dvdDesc'],'Dvd' . $dvdId);
 
         }else{
 
@@ -56,7 +56,7 @@ class DVDController extends Controller
             
             Session::flash('success', 'DVD updated successfully');
             
-            $this->catalogController->update($data['name'], $request['dvdDesc'], $request['dvdId']);
+            $this->catalogController->update($data['name'], $request['dvdDesc'],'Dvd' . $request['dvdId']);
 
         }
         

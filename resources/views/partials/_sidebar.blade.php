@@ -51,13 +51,6 @@
     </li>
 
     <li class="nav-item">
-     <a class="nav-link" href="{{ route('bookandreturn') }}">
-      <i class="mdi mdi-book-open-variant menu-icon"></i>
-      <span class="menu-title">Books And Returns</span>
-     </a>
-    </li>
-
-    <li class="nav-item">
       <a class="nav-link" href="{{ route('reports') }}">
         <i class="mdi mdi-chart-pie menu-icon"></i>
         <span class="menu-title">Reports</span>
