@@ -77,15 +77,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/catalog', 'index')->name('catalog');
     });
 
-    Route::controller(SystemLogsController::class)->group(function (){
-        Route::get('/systemlogs', 'index')->name('systemlogs');
-    });
-
     Route::controller(ReportController::class)->group(function (){
         Route::get('/reports', 'index')->name('reports');
         Route::get('/reports/excel', 'excel')->name('reports.excel');
         Route::get('/reports/pdf', 'pdf')->name('reports.pdf');
         Route::get('/reports/getData', 'getData')->name('reports.getData');
+    });
+
+    Route::controller(SystemLogsController::class)->group(function (){
+        Route::get('/systemlogs', 'index')->name('systemlogs');
     });
 
 });

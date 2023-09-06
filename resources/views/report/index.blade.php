@@ -52,9 +52,20 @@
                     // Extract headers and data from the response
                     var columnHeaders = response.headers;
                     var data = response.data;
-
-                    // Populate the table with headers and data
-                    populateTable(columnHeaders, data);
+                    if(columnHeaders != null)
+                    {
+                      // Populate the table with headers and data
+                      populateTable(columnHeaders, data);
+                    }else{
+                      Swal.fire({
+                      icon: 'error',
+                      title: "Select a Module to view",
+                      toast: true,
+                      position: 'top-end', // Position the toast notification at the top-right corner
+                      showConfirmButton: false,
+                      timer: 5000 // Display for 5 seconds
+                  });
+                    }
                 },
                 error: function(error) {
                     console.error(error);

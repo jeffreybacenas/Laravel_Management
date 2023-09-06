@@ -9,6 +9,7 @@ use App\Models\Book;
 use App\Models\Magazine;
 use App\Models\Dvd;
 use App\Models\User;
+use App\Models\SystemLog;
 
 class ReportController extends Controller
 {
@@ -98,6 +99,29 @@ class ReportController extends Controller
                 User::raw('DATE_FORMAT(updated_at, "%Y-%m-%d") as formatted_updated_at'),
             ])->get();
 
+        }else if($selectedSource === 'systemLogs'){
+
+            $columnHeaders = [
+                'modulename' => 'Module Name', 
+                'actionname' => 'Action Name', 
+                'status' => 'Status',
+                'remarks' => 'Remarks', 
+                'formatted_created_at' => 'Date Created',
+                'formatted_updated_at' => 'Date Updated',
+            ];
+            
+            $data = SystemLog::select([
+                'modulename',
+                'actionname',
+                'status',
+                'remarks',
+                User::raw('DATE_FORMAT(created_at, "%Y-%m-%d") as formatted_created_at'),
+                User::raw('DATE_FORMAT(updated_at, "%Y-%m-%d") as formatted_updated_at'),
+            ])->get();
+
+        }else{
+            $columnHeaders = null;
+            $data = null;
         }
 
         // Create a structured data array that includes headers and data rows
