@@ -13,7 +13,7 @@
 <div class="wrapper">
 		<form method="POST" action="{{ route('registration.store') }}">
 		@csrf
-			<h1>Library Management</h1>
+			<h1>Library Management Registration</h1>
 
 			<div class="form-group">
 				<div class="row">

@@ -14,10 +14,7 @@
 	<div class="wrapper">
 		<form method="POST" action="{{ route('performLogin') }}">
 		@csrf
-			<h1>Library Management</h1>
-
-			
-
+			<h1>Library Management Login</h1>
 			<div class="input-box">
 				<input type="text" placeholder="Email" class="form-control"  name="email" required>
 				<i class='bx bxs-user'></i>
@@ -52,6 +49,7 @@
         });
     </script>
 	@endif
+
 	@if(session('success'))
           <script>
             Swal.fire({

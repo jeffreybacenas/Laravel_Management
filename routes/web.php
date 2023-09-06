@@ -85,6 +85,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/reports', 'index')->name('reports');
         Route::get('/reports/excel', 'excel')->name('reports.excel');
         Route::get('/reports/pdf', 'pdf')->name('reports.pdf');
+        Route::get('/reports/getData', 'getData')->name('reports.getData');
     });
 
 });
