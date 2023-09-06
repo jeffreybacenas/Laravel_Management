@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Systemlog;
 
 class SystemLogsController extends Controller
 {
@@ -10,4 +11,5 @@ class SystemLogsController extends Controller
     {
         return view('systemlogs.index');
     }
+
 }

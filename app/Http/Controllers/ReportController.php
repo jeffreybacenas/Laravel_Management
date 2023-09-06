@@ -123,8 +123,7 @@ class ReportController extends Controller
             $columnHeaders = null;
             $data = null;
         }
-
-        // Create a structured data array that includes headers and data rows
+        
         $structuredData = [
             'headers' => $columnHeaders,
             'data' => $data,

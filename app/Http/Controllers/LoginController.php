@@ -43,22 +43,29 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'fname' => 'required',
-            'lname' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:3|confirmed',
-        ]);
+        try
+        {
 
-        $user = new User();
-        $user->fname = ucfirst(strtolower($data['fname']));
-        $user->mname = ucfirst(strtolower($request['mname']));
-        $user->lname = ucfirst(strtolower($data['lname']));
-        $user->email = $data['email'];
-        $user->password = bcrypt($data['password']);
-        $user->save();
+            $data = $request->validate([
+                'fname' => 'required',
+                'lname' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:3|confirmed',
+            ]);
 
-        Session::flash('success', 'User registered successfully');
-        return redirect()->route('login');
+            $user = new User();
+            $user->fname = ucfirst(strtolower($data['fname']));
+            $user->mname = ucfirst(strtolower($request['mname']));
+            $user->lname = ucfirst(strtolower($data['lname']));
+            $user->email = $data['email'];
+            $user->password = bcrypt($data['password']);
+            $user->save();
+
+            Session::flash('success', 'User registered successfully');
+            return redirect()->route('login');
+            
+        }catch(Exception $e){
+
+        }
     }
 }
