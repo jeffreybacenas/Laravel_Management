@@ -18,7 +18,7 @@ body{
 }
 
 .wrapper{
-	width: 420px;
+	width: 600px;
 	background-color: #deb887;
 	color: #000;
 	border-radius: 10px;
@@ -110,3 +110,17 @@ body{
 .register-link p a:hover{
 	text-decoration: underline;
 }
+.input-group {
+    display: inline-block;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+
+.name-inputs {
+    display: inline-block; /* Display the name input boxes inline */
+    vertical-align: top; /* Align input boxes at the top */
+}
+
+
+

@@ -1,68 +1,62 @@
-@include('partials._styles')
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/custom-style/style.css">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  	<link rel="stylesheet" href="{{ asset('css/sweetalert2/sweetalert2.min.css') }}">
+  	<link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
+</head>
 <body>
-  <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-      <div class="content-wrapper d-flex align-items-center auth px-0">
-        <div class="row w-100 mx-0">
-          <div class="col-lg-4 mx-auto">
-            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-              <div class="brand-logo">
-              <div class="text-center mt-5 fw-light ">
-                  <h3 class="text-primary">Library Software Login</h3> 
-                </div>
-              </div>
-              <form action="{{ route('registration.store') }}" method="POST" class="pt-3">
-               @csrf
-                <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" name="fname" value="{{ old('fname') }}" placeholder="First Name">
-                </div>
-                
-                <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" name="mname" value="{{ old('mname') }}"  placeholder="Middle Name(optional)">
-                </div>
-                
-                <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" name="lname" value="{{ old('lname') }}"  placeholder="Last Name">
-                </div>
-                
-                <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" name="email" value="{{ old('email') }}" placeholder="email">
-                </div>
+<div class="wrapper">
+		<form method="POST" action="{{ route('registration.store') }}">
+		@csrf
+			<h1>Library Management</h1>
 
-                <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" name="password" placeholder="Password">
-                </div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col input-box">
+						<input type="text" class="form-control" id="fname" name="fname" placeholder="First Name">
+					</div>
+					<div class="col input-box">
+						<input type="text" class="form-control" id="mname" name="mname" placeholder="Middle Name">
+					</div>
+					<div class="col input-box">
+						<input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name">
+					</div>
+				</div>
+			</div>
 
-                <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" name="password_confirmation" placeholder="ConfirmPassword">
-                </div>
+			<div class="input-box">
+				<input type="text" placeholder="Email" class="form-control"  name="email" required>
+				<i class='bx bxs-user'></i>
+			</div>
 
-                <div class="mt-3 text-center">
-                    <button type="submit" class="btn btn-block btn-facebook auth-form-btn center">
-                    <i class="fa fa-facebook"></i> SIGN UP
-                    </button>
-                </div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col input-box">
+						<input type="password" class="form-control"  placeholder="Password" name="password" required>
+						<i class='bx bxs-lock-alt' ></i>
+					</div>
+					<div class="col input-box">
+						<input type="password" class="form-control" placeholder="Confirm Password" name="password_confirmation" required>
+						<i class='bx bxs-lock-alt' ></i>
+					</div>
+				</div>
+			</div>
 
-                <div class="my-2 d-flex justify-content-between align-items-center">
-                  <div class="form-check">
-                  </div>
-                </div>
-                <div class="text-center mt-4 fw-light">
-                   Already have an account? <a href="{{ route('login') }}" class="text-primary">Login</a>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- content-wrapper ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  
-  @include('partials._footer')
-  @include('partials._script')
+			<button type="submit" class="btn">Login</button>
+
+			<div class="register-link">
+				<p>Already has an account?
+					<a href="{{ route('login') }}">LogIn</a></p>
+			</div>
+
+		</form>
+	</div>
+  <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
 
   @if ($errors->any())
       @foreach ($errors->all() as $error)

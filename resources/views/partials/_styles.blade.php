@@ -21,4 +21,5 @@
   <link rel="stylesheet" href="{{ asset('css/custom-style/custom.css') }} ">
   <link rel="stylesheet" href="{{ asset('css/sweetalert2/sweetalert2.min.css') }}">
   
+  
 </head>
