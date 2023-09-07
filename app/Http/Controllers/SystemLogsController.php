@@ -9,7 +9,9 @@ class SystemLogsController extends Controller
 {
     public function index()
     {
-        return view('systemlogs.index');
+        $systemlogs = Systemlog::All();
+
+        return view('systemlogs.index', compact('systemlogs'));
     }
 
 }

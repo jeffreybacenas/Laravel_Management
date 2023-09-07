@@ -18,29 +18,23 @@
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th> Number </th>
-                          <th> Module Name  </th>
-                          <th> User Name </th>
-                          <th> User Type </th>
-                          <th> Date And Time </th>
+                          <th> Module Name </th>
+                          <th> Action Name  </th>
+                          <th> Status </th>
+                          <th> Remarks </th>
+                          <th> Date Created </th>
+                          <th> Date Updated </th>
                         </tr>
                       </thead>
                       <tbody>
-                      @forelse($users as $user)
-                        <tr data-id="{{ $user->id }}">
-                            <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email  }}</td>
-                            <td>{{  \Carbon\Carbon::parse($user->created_at)->format('M d, Y')  }}</td>
-                            <td >{{ \Carbon\Carbon::parse($user->updated_at)->format('M d, Y') }}</td>
-                            <td>
-                                <a class="btn btn-sm btn-primary scrollButton editButton">
-                                    <i class="mdi mdi-pencil"></i> Edit
-                                </a>
-                                <button class="btn btn-sm btn-danger deleteButton" data-id="{{ $user->id }}">
-                                  <i class="mdi mdi-delete"></i> Delete
-                                </button>
-                            </td>
+                      @forelse($systemlogs as $systemlog)
+                        <tr data-id="{{ $systemlog->id }}">
+                            <td>{{ $systemlog->modulename }}</td>
+                            <td>{{ $systemlog->actionname }}</td>
+                            <td>{{ $systemlog->status  }}</td>
+                            <td>{{ $systemlog->remarks  }}</td>
+                            <td>{{  \Carbon\Carbon::parse($systemlog->created_at)->format('M d, Y')  }}</td>
+                            <td >{{ \Carbon\Carbon::parse($systemlog->updated_at)->format('M d, Y') }}</td>
                         </tr>
                         @empty
                         <tr>
