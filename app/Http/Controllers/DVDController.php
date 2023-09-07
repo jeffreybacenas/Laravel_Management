@@ -3,88 +3,132 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Services\SaveLogs;
 use App\Models\Dvd;
 
 class DVDController extends Controller
 {
-    protected $catalogController;
+    protected $savelogs;
 
-    public function __construct(CatalogController $catalogController)
+    public function __construct(SaveLogs $savelogs)
     {
-        $this->catalogController = $catalogController;
+        $this->savelogs = $savelogs;
     }
 
     public function index()
     {
-        $dvds = Dvd::All();
+        $userAuth = Auth::user();
 
-        return view('dvd.index', compact('dvds'));
+        try{
+            $dvds = Dvd::All();
+
+            $this->savelogs->store("Dvd Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Retrieving dvd list"); 
+            
+            return view('dvd.index', compact('dvds'));
+        }catch(Exception $e){
+            $this->savelogs->store("Dvd Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+            
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
+        }
     }
     
     public function store(Request $request)
     {
-        if($request->dvdId == null){
+        $userAuth = Auth::user();
 
-            $data = $request->validate([
-                'name' => 'required|unique:dvds'
-            ]);
+        try{
 
-            $dvd = new Dvd;
-            $dvd->name = $data['name'];
-            $dvd->description = $request['dvdDesc'];
-            $dvd->save();
+            if($request->dvdId == null){
 
-            Session::flash('success', 'DVD inserted successfully');
+                $data = $request->validate([
+                    'name' => 'required|unique:dvds'
+                ]);
 
-            $dvdId = Dvd::max('id');
+                $dvd = new Dvd;
+                $dvd->name = $data['name'];
+                $dvd->description = $request['dvdDesc'];
+                $dvd->save();
 
-            $this->catalogController->store($data['name'], $request['dvdDesc'],'Dvd' . $dvdId);
-
-        }else{
-
-            $data = $request->validate([
-                'name' => 'required|unique:dvds,name,'. $request->dvdId,
-            ]);
-
-            $dvd = Dvd::find($request['dvdId']);
-
-            $dvd->name = $data['name'];
-            $dvd->description = $request['dvdDesc'];
-            $dvd->save();
+                $this->savelogs->store("Dvd Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "DVD inserted successfully"); 
             
-            Session::flash('success', 'DVD updated successfully');
-            
-            $this->catalogController->update($data['name'], $request['dvdDesc'],'Dvd' . $request['dvdId']);
+                Session::flash('success', 'DVD inserted successfully');
+            }else{
 
+                $data = $request->validate([
+                    'name' => 'required|unique:dvds,name,'. $request->dvdId,
+                ]);
+
+                $dvd = Dvd::find($request['dvdId']);
+
+                $dvd->name = $data['name'];
+                $dvd->description = $request['dvdDesc'];
+                $dvd->save();
+
+                $this->savelogs->store("Dvd Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "DVD updated successfully"); 
+            
+                Session::flash('success', 'DVD updated successfully');
+                
+            }
+            
+            return redirect()->route('dvd');
+        }catch(Exception $e){
+            $this->savelogs->store("Dvd Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+            
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
         }
-        
-        return redirect()->route('dvd');
     }
 
 
     public function edit($id)
     {
-        $dvd = Dvd::findOrFail($id);
+        $userAuth = Auth::user();
 
-        return new JsonResponse($dvd);
+        try{
+            $dvd = Dvd::findOrFail($id);
+
+            $this->savelogs->store("Dvd Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Retrieving dvd details"); 
+            
+            return new JsonResponse($dvd);
+        }catch(Exception $e){
+            $this->savelogs->store("Dvd Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+            
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
+        }
     }
 
     public function delete($id)
     {
-        $dvd = Dvd::find($id);
+        $userAuth = Auth::user();
 
-        if (!$dvd) {
-            return response()->json(['message' => 'DVD not found'], 404);
+        try{
+
+            $dvd = Dvd::find($id);
+
+            if (!$dvd) {
+                $this->savelogs->store("Dvd Module", $userAuth->fname . ' ' . $userAuth->lname , "Error", "DVD not found"); 
+            
+                return response()->json(['message' => 'DVD not found'], 404);
+            }
+
+            $dvd->delete();
+            Session::flash('success', 'DVD deleted successfully');
+            
+            $this->savelogs->store("Dvd Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "DVD deleted successfully"); 
+            return response()->json(['message' => 'DVD deleted successfully'], 200);
+
+        }catch(Exception $e){
+
+            $this->savelogs->store("Dvd Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+            
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
         }
-
-        $dvd->delete();
-        Session::flash('success', 'DVD deleted successfully');
-
-        $this->catalogController->delete($id);
-
-        return response()->json(['message' => 'DVD deleted successfully'], 200);
 
     }
 }

@@ -31,7 +31,16 @@
                         <tr data-id="{{ $systemlog->id }}">
                             <td>{{ $systemlog->modulename }}</td>
                             <td>{{ $systemlog->actionname }}</td>
-                            <td>{{ $systemlog->status  }}</td>
+                            <td>
+                              @if ($systemlog->status === 'Success')
+                                  <i class="mdi mdi-check-circle text-success"></i>
+                              @elseif ($systemlog->status === 'Error')
+                                  <i class="mdi mdi-alert-circle text-danger"></i>
+                              @elseif ($systemlog->status === 'Bug')
+                                  <i class="mdi mdi-bug text-danger"></i>
+                              @endif
+                              {{ $systemlog->status }}
+                            </td>
                             <td>{{ $systemlog->remarks  }}</td>
                             <td>{{  \Carbon\Carbon::parse($systemlog->created_at)->format('M d, Y')  }}</td>
                             <td >{{ \Carbon\Carbon::parse($systemlog->updated_at)->format('M d, Y') }}</td>

@@ -5,10 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Services\SaveLogs;
 use App\Models\User;
 
 class LoginController extends Controller
 {
+    protected $savelogs;
+
+    public function __construct(SaveLogs $savelogs)
+    {
+        $this->savelogs = $savelogs;
+    }
+
     public function index()
     {
         return view("auth.index");
@@ -21,24 +29,52 @@ class LoginController extends Controller
 
     public function performLogin(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        try{
 
-        if (Auth::attempt($credentials)) {
+            $credentials = $request->only('email', 'password');
 
-            $userDetails = User::where('email', $credentials['email'])->First();
+            if (Auth::attempt($credentials)) {
 
-            Session::flash('success', 'Welcome ' . $userDetails->fname . ' ' . $userDetails->mname . ' ' . $userDetails->lname);
-            return redirect()->route('dashboard');
-        } else {
-            Session::flash('error', 'Invalid credentials');
-            return redirect()->route('login');
+                $userDetails = User::where('email', $credentials['email'])->First();
+
+                Session::flash('success', 'Welcome ' . $userDetails->fname . ' ' . $userDetails->mname . ' ' . $userDetails->lname);
+                
+                $this->savelogs->store("Login Module", $userDetails->fname . ' ' . $userDetails->lname , "Success", "User logging in..."); 
+
+                return redirect()->route('dashboard');
+            } else {
+
+                $this->savelogs->store("Login Module", "Unknown User" , "Error", "Invalid credentials"); 
+
+                Session::flash('error', 'Invalid credentials');
+                return redirect()->route('login');
+            }
+
+        }catch(Exception $e){
+
+            $this->savelogs->store("Login Module", 'Unknown User' , "Bug", "Exception Error / Exception Bug"); 
+
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
         }
     }
 
     public function logout()
     {
-        Auth::logout();
-        return redirect()->route('login');
+        $userAuth = Auth::user();
+
+        try{
+            $this->savelogs->store("Logout Module", $userAuth->fname . ' ' . $userAuth->lname , "Sucess", "User logging out..."); 
+
+            Auth::logout();
+            return redirect()->route('login');
+
+        }catch(Exception $e){
+            $this->savelogs->store("Logout Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
+        }
     }
 
     public function store(Request $request)

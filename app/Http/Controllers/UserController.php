@@ -24,7 +24,7 @@ class UserController extends Controller
 
         try{
 
-            $users = User::where('id', '!=', $user->id)->get();
+            $users = User::where('id', '!=', $userAuth->id)->get();
 
             $this->savelogs->store("User Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Retrieving user list"); 
             
