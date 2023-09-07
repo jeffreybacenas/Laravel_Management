@@ -20,11 +20,22 @@ class UserController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
+        try{
 
-        $users = User::where('id', '!=', $user->id)->get();
+            $user = Auth::user();
 
-        return view('user.index', compact('users'));
+            $users = User::where('id', '!=', $user->id)->get();
+
+            $this->savelogs->store("User Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Retrieving user list"); 
+            
+            return view('user.index', compact('users'));
+
+        }catch(Exception $e){
+            
+            $this->savelogs->store("User Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+
+            return redirect()->back();
+        }
     }
 
     public function store(Request $request)
@@ -108,15 +119,33 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        $user = User::find($id);
+        try{
 
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            $user = User::find($id);
+
+            if (!$user) {
+                $this->savelogs->store("User Module", $userAuth->fname . ' ' . $userAuth->lname , "Error", "User not found");
+
+                return response()->json(['message' => 'User not found'], 404);
+            }
+
+            $user->delete();
+
+            $this->savelogs->store("User Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "User deleted successfully");
+
+            Session::flash('success', 'User deleted successfully');
+
+            return response()->json(['message' => 'User deleted successfully'], 200);
+
+        }catch(Exception $e){
+
+            $this->savelogs->store("User Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug");
+
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
+
         }
 
-        $user->delete();
-        Session::flash('success', 'User deleted successfully');
-        return response()->json(['message' => 'User deleted successfully'], 200);
-
     }
+
 }

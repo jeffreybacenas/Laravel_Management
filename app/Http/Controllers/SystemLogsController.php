@@ -9,9 +9,21 @@ class SystemLogsController extends Controller
 {
     public function index()
     {
-        $systemlogs = Systemlog::All();
+        try{
 
-        return view('systemlogs.index', compact('systemlogs'));
+            $systemlogs = Systemlog::All();
+
+            $this->savelogs->store("System Logs", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Retrieving system log list"); 
+            
+            return view('systemlogs.index', compact('systemlogs'));
+
+        }catch(Exception $e){
+
+            $this->savelogs->store("System Logs", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+
+            return redirect()->back();
+
+        }
     }
 
 }
