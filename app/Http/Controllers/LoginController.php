@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Services\SaveLogs;
 use App\Models\User;
+use Exception;
 
 class LoginController extends Controller
 {
@@ -52,7 +53,7 @@ class LoginController extends Controller
 
         }catch(Exception $e){
 
-            $this->savelogs->store("Login Module", 'Unknown User' , "Bug", "Exception Error / Exception Bug"); 
+            //$this->savelogs->store("Login Module", 'Unknown User' , "Bug", "Exception Error / Exception Bug"); 
 
             Session::flash('error', 'Oops! Something went wrong. Please try again later.');
             return redirect()->back();

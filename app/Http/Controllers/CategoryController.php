@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Services\SaveLogs;
 use App\Models\Category;
+use Exception;
 
 class CategoryController extends Controller
 {

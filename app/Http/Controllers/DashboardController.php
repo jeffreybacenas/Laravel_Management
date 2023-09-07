@@ -9,6 +9,7 @@ use App\Models\Magazine;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\Dvd;
+use Exception;
 
 class DashboardController extends Controller
 {

@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Services\SaveLogs;
 use App\Models\Magazine;
+use Exception;
 
 class MagazineController extends Controller
 {

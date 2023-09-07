@@ -113,5 +113,18 @@
           </script>
         @endif
 
+        @if(session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('error') }}', // Use session('error') here
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000
+            });
+        </script>
+	      @endif
+
         
 

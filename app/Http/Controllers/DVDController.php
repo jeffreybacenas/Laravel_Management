@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Services\SaveLogs;
 use App\Models\Dvd;
+use Exception;
 
 class DVDController extends Controller
 {

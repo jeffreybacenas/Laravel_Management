@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Services\SaveLogs;
 use App\Models\Book;
+use Exception;
 
 class BooksController extends Controller
 {
@@ -21,6 +22,9 @@ class BooksController extends Controller
 
     public function index()
     {
+        
+        $userAuth = Auth::user();
+
         try{
 
             $books = Book::All();

@@ -11,6 +11,7 @@ use App\Models\Magazine;
 use App\Models\Book;
 use App\Models\Dvd;
 use App\Models\User;
+use Exception;
 
 class ReportController extends Controller
 {

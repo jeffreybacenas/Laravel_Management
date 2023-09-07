@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Services\SaveLogs;
 use App\Models\Systemlog;
+use Exception;
 
 class SystemLogsController extends Controller
 {
