@@ -5,83 +5,135 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Services\SaveLogs;
 use App\Models\Magazine;
 
 class MagazineController extends Controller
 {
-    protected $catalogController;
+    protected $savelogs;
 
-    public function __construct(CatalogController $catalogController)
+    public function __construct(SaveLogs $savelogs)
     {
-        $this->catalogController = $catalogController;
+        $this->savelogs = $savelogs;
     }
 
     public function index()
     {
-        $magazines = Magazine::All();
-        return view('magazines.index', compact('magazines'));
+        $userAuth = Auth::user();
+
+        try{
+            
+            $magazines = Magazine::All();
+
+            $this->savelogs->store("Magazine Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Retrieving magazine list"); 
+            
+            return view('magazines.index', compact('magazines'));
+
+        }catch(Exception $e){
+
+            $this->savelogs->store("Magazine Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+            
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
+        }
     }
 
     public function store(Request $request)
     {
-         if($request->magazineId == null){
+        $userAuth = Auth::user();
 
-            $data = $request->validate([
-                'name' => 'required|unique:magazines'
-            ]);
+        try{
+            if($request->magazineId == null){
 
-            $magazine = new Magazine;
-            $magazine->name = $data['name'];
-            $magazine->description = $request['magazineDesc'];
-            $magazine->save();
+                $data = $request->validate([
+                    'name' => 'required|unique:magazines'
+                ]);
 
-            Session::flash('success', 'Magazine inserted successfully');
+                $magazine = new Magazine;
+                $magazine->name = $data['name'];
+                $magazine->description = $request['magazineDesc'];
+                $magazine->save();
+                
+                $this->savelogs->store("Magazine Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Magazine inserted successfully");
 
-            $magazineId = Magazine::max('id');
+                Session::flash('success', 'Magazine inserted successfully');
 
-            $this->catalogController->store($data['name'], $request['magazineDesc'], 'Magazine' . $magazineId);
 
-        }else{
+            }else{
+                
+                $data = $request->validate([
+                    'name' => 'required|unique:magazines,name,' . $request->magazineId,
+                ]);
+
+                $magazine = Magazine::find($request['magazineId']);
+
+                $magazine->name = $data['name'];
+                $magazine->description = $request['magazineDesc'];
+                $magazine->save();
+
+                $this->savelogs->store("Magazine Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Magazine updated successfully");
+
+                Session::flash('success', 'Magazine updated successfully');
+            }
             
-            $data = $request->validate([
-                'name' => 'required|unique:magazines,name,' . $request->magazineId,
-            ]);
+            return redirect()->route('magazines');
+        }catch(Exception $e){
 
-            $magazine = Magazine::find($request['magazineId']);
-
-            $magazine->name = $data['name'];
-            $magazine->description = $request['magazineDesc'];
-            $magazine->save();
+            $this->savelogs->store("Magazine Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
             
-            Session::flash('success', 'Magazine updated successfully');
-
-            $this->catalogController->update($data['name'], $request['magazineDesc'],'Magazine' . $request['magazineId']);
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
         }
-        
-        return redirect()->route('magazines');
     }
 
 
     public function edit($id)
     {
-        $magazine = Magazine::findOrFail($id);
+        $userAuth = Auth::user();
 
-        return new JsonResponse($magazine);
+        try{
+            $magazine = Magazine::findOrFail($id);
+
+            $this->savelogs->store("Magazine Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Retrieving magazine details");
+
+            return new JsonResponse($magazine);
+        }catch(Exception $e){
+
+            $this->savelogs->store("Magazine Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+            
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
+        }
     }
 
     public function delete($id)
     {
-        $magazine = Magazine::find($id);
+        $userAuth = Auth::user();
 
-        if (!$magazine) {
-            return response()->json(['message' => 'Magazine not found'], 404);
+        try{
+
+            $magazine = Magazine::find($id);
+
+            if (!$magazine) {
+
+                $this->savelogs->store("Magazine Module", $userAuth->fname . ' ' . $userAuth->lname , "Error", "Magazine not found");
+
+                return response()->json(['message' => 'Magazine not found'], 404);
+            }
+
+            $magazine->delete();
+
+            $this->savelogs->store("Magazine Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Magazine deleted successfully");
+
+            Session::flash('success', 'Magazine deleted successfully');
+
+            return response()->json(['message' => 'Magazine deleted successfully'], 200);
+
+        }catch(Exception $e){
+            $this->savelogs->store("Magazine Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+            
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
         }
-
-        $magazine->delete();
-        Session::flash('success', 'Magazine deleted successfully');
-
-        $this->catalogController->delete($id);
-
-        return response()->json(['message' => 'Magazine deleted successfully'], 200);
     }
 }

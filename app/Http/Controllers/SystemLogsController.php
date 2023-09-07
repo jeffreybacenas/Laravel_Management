@@ -2,13 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Services\SaveLogs;
 use App\Models\Systemlog;
 
 class SystemLogsController extends Controller
 {
+    protected $savelogs;
+
+    public function __construct(SaveLogs $savelogs)
+    {
+        $this->savelogs = $savelogs;
+    }
     public function index()
     {
+        
+        $userAuth = Auth::user();
+        
         try{
 
             $systemlogs = Systemlog::All();
@@ -21,6 +32,7 @@ class SystemLogsController extends Controller
 
             $this->savelogs->store("System Logs Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
 
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
             return redirect()->back();
 
         }

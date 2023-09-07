@@ -20,9 +20,9 @@ class UserController extends Controller
 
     public function index()
     {
-        try{
+        $userAuth = Auth::user();
 
-            $user = Auth::user();
+        try{
 
             $users = User::where('id', '!=', $user->id)->get();
 
@@ -34,15 +34,17 @@ class UserController extends Controller
             
             $this->savelogs->store("User Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
 
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
             return redirect()->back();
         }
     }
 
     public function store(Request $request)
     {
-        try{
+        
+        $userAuth = Auth::user();
 
-            $userAuth = Auth::user();
+        try{
 
             if($request->userID == null){
                 
@@ -102,6 +104,8 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        $userAuth = Auth::user();
+
         try{
             $user = User::findOrFail($id);
 
@@ -119,6 +123,9 @@ class UserController extends Controller
 
     public function delete($id)
     {
+        
+        $userAuth = Auth::user();
+
         try{
 
             $user = User::find($id);

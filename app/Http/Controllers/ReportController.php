@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
-
-use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Services\SaveLogs;
+use App\Models\SystemLog;
 use App\Models\Magazine;
+use App\Models\Book;
 use App\Models\Dvd;
 use App\Models\User;
-use App\Models\SystemLog;
 
 class ReportController extends Controller
 {
+    protected $savelogs;
+
+    public function __construct(SaveLogs $savelogs)
+    {
+        $this->savelogs = $savelogs;
+    }
     public function index()
     {
         return view('report.index');
@@ -20,6 +27,8 @@ class ReportController extends Controller
 
     public function getData(Request $request)
     {
+        $userAuth = Auth::user();
+
         try{
             $selectedSource = $request->input('source'); // Get the selected data source from the request
 
@@ -137,6 +146,7 @@ class ReportController extends Controller
         }catch(Exception $e){
             $this->savelogs->store("Report Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
 
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
             return redirect()->back();
         }
     }
