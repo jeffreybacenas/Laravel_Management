@@ -4,91 +4,131 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\CatalogController;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Services\SaveLogs;
 use App\Models\Book;
 
 class BooksController extends Controller
 {
-    protected $catalogController;
+    protected $savelogs;
 
-    public function __construct(CatalogController $catalogController)
+    public function __construct(SaveLogs $savelogs)
     {
-        $this->catalogController = $catalogController;
+        $this->savelogs = $savelogs;
     }
 
     public function index()
     {
-        $books = Book::All();
-        return view('books.index' ,compact('books'));
+        try{
+
+            $books = Book::All();
+
+            $this->savelogs->store("Book Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Retrieving book list"); 
+            
+            return view('books.index' ,compact('books'));
+
+        }catch(Exception $e){
+            $this->savelogs->store("Book Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+            
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
+        }
     }
 
     public function store(Request $request)
     {
-        if($request['bookID'] == null){
+        try{
+
+            if($request['bookID'] == null){
+                
+                $data = $request->validate([
+                    'title' => 'required|unique:books'
+                ]);
+
+                $book = new Book;
+                $book->title = $data['title'];
+                $book->description = $request['description'];
+                $book->author = $request['author'];
+                $book->publishdate = $request['publishDate'];
+                $book->save();
+
+                $this->savelogs->store("Book Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Book inserted successfully"); 
             
-            $data = $request->validate([
-                'title' => 'required|unique:books'
-            ]);
+                Session::flash('success', 'Book inserted successfully');
 
-            $book = new Book;
-            $book->title = $data['title'];
-            $book->description = $request['description'];
-            $book->author = $request['author'];
-            $book->publishdate = $request['publishDate'];
-            $book->save();
+            }else{
 
-            Session::flash('success', 'Book inserted successfully');
+                $data = $request->validate([
+                    'title' => 'required|unique:books,title,' .$request['bookID'],
+                ]);
 
-            $bookId = Book::max('id');
+                $book = Book::find($request['bookID']);
 
-            $this->catalogController->store($data['title'], $request['description'], 'Book' . $bookId);
-
-        }else{
-
-            $data = $request->validate([
-                'title' => 'required|unique:books,title,' .$request['bookID'],
-            ]);
-
-            $book = Book::find($request['bookID']);
-
-            $book->title = $data['title'];
-            $book->description = $request['description'];
-            $book->author = $request['author'];
-            $book->publishdate = $request['publishDate'];
-            $book->save();
+                $book->title = $data['title'];
+                $book->description = $request['description'];
+                $book->author = $request['author'];
+                $book->publishdate = $request['publishDate'];
+                $book->save();
+                
+                $this->savelogs->store("Book Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Book inserted successfully"); 
             
-            Session::flash('success', 'Book updated successfully');
+                Session::flash('success', 'Book updated successfully');
 
-            $this->catalogController->update($data['title'], $request['description'], 'Book' . $request['bookID']);
+                $this->catalogController->update($data['title'], $request['description'], 'Book' . $request['bookID']);
 
+            }
+            
+            return redirect()->route('books');
+
+        }catch(Exception $e){
+            $this->savelogs->store("Book Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+            
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
         }
-        
-        return redirect()->route('books');
     }
 
 
     public function edit($id)
     {
-        $book = Book::findOrFail($id);
+        try{
+            $book = Book::findOrFail($id);
 
-        return new JsonResponse($book);
+            return new JsonResponse($book);
+        }catch(Exception $e){
+            $this->savelogs->store("Book Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+            
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
+        }
     }
 
     public function delete($id)
     {
-        $book = Book::find($id);
+        try{
 
-        if (!$book) {
-            return response()->json(['message' => 'Book not found'], 404);
+            $book = Book::find($id);
+
+            if (!$book) {
+                return response()->json(['message' => 'Book not found'], 404);
+            }
+
+            $book->delete();
+            Session::flash('success', 'Book deleted successfully');
+            
+            $this->catalogController->delete($id);
+
+            return response()->json(['message' => 'Book deleted successfully'], 200);
+
+        }catch(Exception $e){
+
+            $this->savelogs->store("Book Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+            
+            Session::flash('error', 'Oops! Something went wrong. Please try again later.');
+            return redirect()->back();
         }
-
-        $book->delete();
-        Session::flash('success', 'Book deleted successfully');
-        
-        $this->catalogController->delete($id);
-
-        return response()->json(['message' => 'Book deleted successfully'], 200);
     }
 
 }
