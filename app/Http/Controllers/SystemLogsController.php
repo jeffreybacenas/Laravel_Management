@@ -13,13 +13,13 @@ class SystemLogsController extends Controller
 
             $systemlogs = Systemlog::All();
 
-            $this->savelogs->store("System Logs", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Retrieving system log list"); 
+            $this->savelogs->store("System Logs Module", $userAuth->fname . ' ' . $userAuth->lname , "Success", "Retrieving system log list"); 
             
             return view('systemlogs.index', compact('systemlogs'));
 
         }catch(Exception $e){
 
-            $this->savelogs->store("System Logs", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
+            $this->savelogs->store("System Logs Module", $userAuth->fname . ' ' . $userAuth->lname , "Bug", "Exception Error / Exception Bug"); 
 
             return redirect()->back();
 
