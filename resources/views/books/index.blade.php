@@ -22,7 +22,7 @@
                   <div class="table-responsive">
                     
                     <div class="table-controls d-flex text-center">
-                      <div class="search-container ml-auto"> <!-- Add ml-auto to align to the right -->
+                      <div class="search-container ml-auto"> 
                           <label for="searchInput" class="search-label">Search:</label>
                           <input type="text" id="searchInput" class="form-control form-control-sm search-input">
                       </div>
@@ -111,7 +111,10 @@
         @include('partials._footer')
 
         <script>
-          
+          $(document).ready(function(){
+            $('#booksTable').DataTable();
+          });
+
           const booksTable = document.getElementById('booksTable');
           const bookID = document.getElementById('bookID');
           const bookTitleInput = document.getElementById('bookTitleInput');

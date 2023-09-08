@@ -33,7 +33,7 @@ class LoginController extends Controller
         try{
 
             $credentials = $request->only('email', 'password');
-
+            
             if (Auth::attempt($credentials)) {
 
                 $userDetails = User::where('email', $credentials['email'])->First();
