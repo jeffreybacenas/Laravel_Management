@@ -20,6 +20,6 @@
   <link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
   <link rel="stylesheet" href="{{ asset('css/custom-style/custom.css') }} ">
   <link rel="stylesheet" href="{{ asset('css/sweetalert2/sweetalert2.min.css') }}">
-  <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="{{ asset('css/jquery/jquery.dataTables.min.css') }}">
   
 </head>

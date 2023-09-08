@@ -43,6 +43,9 @@ class BooksController extends Controller
 
     public function store(Request $request)
     {
+       
+        $userAuth = Auth::user();
+         
         try{
 
             if($request['bookID'] == null){
