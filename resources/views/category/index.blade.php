@@ -15,14 +15,6 @@
                    <button class="btn btn-primary scrollButton">Add Category</button>
                   </div>
                   <div class="table-responsive">
-
-                  <div class="table-controls d-flex text-center">
-                    <div class="search-container ml-auto"> <!-- Add ml-auto to align to the right -->
-                     <label for="searchInput" class="search-label">Search:</label>
-                     <input type="text" id="searchInput" class="form-control form-control-sm search-input">
-                    </div>
-                  </div>
-
                     <table class="table table-striped" id="categoryTable">
                       <thead>
                         <tr>
@@ -35,7 +27,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @forelse($categories as $category)
+                        @foreach($categories as $category)
                         <tr data-id="{{ $category->id }}">
                             <td>{{ $category->id }}</td>
                             <td>{{ $category->name }}</td>
@@ -51,11 +43,7 @@
                                 </button>
                             </td>
                         </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="text-center">No records found.</td>
-                        </tr>
-                        @endforelse
+                        @endforeach
                         </tbody>
                     </table>
                   </div>
@@ -90,7 +78,9 @@
         </div>
         @include('partials._footer')
         <script>
-
+          $(document).ready(function(){
+            $('#categoryTable').DataTable();
+          });
           const categoryTable = document.getElementById('categoryTable');
           const catID = document.getElementById('catID');
           const categoryName = document.getElementById('categoryName');
@@ -215,24 +205,7 @@
           }
         });
 
-        document.addEventListener('DOMContentLoaded', function () {
-          const searchInput = document.getElementById('searchInput');
-          const tableRows = document.querySelectorAll('#categoryTable tbody tr');
-
-          searchInput.addEventListener('input', function () {
-              const searchTerm = searchInput.value.trim().toLowerCase();
-
-              tableRows.forEach(row => {
-                  const rowData = row.textContent.toLowerCase();
-
-                  if (rowData.includes(searchTerm)) {
-                      row.style.display = '';
-                  } else {
-                      row.style.display = 'none';
-                  }
-              });
-          });
-        });
+        
         </script>  
         @include('partials._script')
         @if ($errors->any())

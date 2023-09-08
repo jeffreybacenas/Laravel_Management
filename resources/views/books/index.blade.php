@@ -31,7 +31,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($books as $book)
+                            @foreach ($books as $book)
                             <tr data-id="{{ $book->id }}">
                                 <td>{{ $book->title }}</td>
                                 <td style="color: {{ $book->description ? 'inherit' : 'blue' }};">{{ $book->description ? $book->description : 'N/A' }}</td>
@@ -46,11 +46,7 @@
                                     </button>
                                 </td>
                             </tr>
-                            @empty
-                            <tr>
-                                <td colspan="5" class="text-center">No records found.</td>
-                            </tr>
-                            @endforelse
+                            @endforeach  
                         </tbody>
                     </table>
                     <div class="pagination-container d-flex justify-content-center mt-3">
