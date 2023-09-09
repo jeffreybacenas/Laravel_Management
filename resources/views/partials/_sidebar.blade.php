@@ -44,13 +44,6 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('catalog') }}">
-        <i class="mdi mdi-file-cabinet menu-icon"></i>
-        <span class="menu-title">Catalog</span>
-      </a>
-    </li>
-
-    <li class="nav-item">
       <a class="nav-link" href="{{ route('reports') }}">
         <i class="mdi mdi-chart-pie menu-icon"></i>
         <span class="menu-title">Reports</span>

@@ -72,10 +72,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/user/edit/{id}', 'edit')->name('user.edit');
         Route::delete('/user/delete/{id}', 'delete')->name('user.delete');
     });
-    
-    Route::controller(CatalogController::class)->group(function (){
-        Route::get('/catalog', 'index')->name('catalog');
-    });
 
     Route::controller(ReportController::class)->group(function (){
         Route::get('/reports', 'index')->name('reports');

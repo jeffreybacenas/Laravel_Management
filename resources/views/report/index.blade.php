@@ -26,7 +26,7 @@
                 </div>
 
                   <div class="table-responsive">
-                    <table class="table table-striped" id="data-table">
+                    <table class="table table-striped" id="data-table" id="reportTable">
                       <thead>
                       </thead>
                       <tbody>
@@ -40,6 +40,7 @@
         </div>
         @include('partials._footer')
         <script>
+          
           $('#data-source').change(function() {
             var selectedSource = $(this).val();
 
@@ -91,3 +92,8 @@
 
         </script>  
         @include('partials._script')
+        <script>
+          $(document).ready(function(){
+            $('#reportTable').DataTable();
+          });
+        </script>  
