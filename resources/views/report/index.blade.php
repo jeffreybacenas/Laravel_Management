@@ -26,7 +26,7 @@
                 </div>
 
                   <div class="table-responsive">
-                    <table class="table table-striped" id="data-table" id="reportTable">
+                    <table class="table table-striped" id="data-table">
                       <thead>
                       </thead>
                       <tbody>
@@ -40,7 +40,6 @@
         </div>
         @include('partials._footer')
         <script>
-          
           $('#data-source').change(function() {
             var selectedSource = $(this).val();
 
@@ -66,10 +65,11 @@
           });
 
           function populateTable(columnHeaders, data) {
+            
               // Clear existing table content
               $('#data-table').empty();
               
-              // Add table headers based on the received column headers
+              // Add table headers based on the recei[ved column headers
               var tableHeaders = '<thead><tr>';
               for (var key in columnHeaders) {
                   tableHeaders += '<th>' + columnHeaders[key] + '</th>';
@@ -88,12 +88,20 @@
               }
               tableBody += '</tbody>';
               $('#data-table').append(tableBody);
-          }
 
+              // Destroy the existing DataTable instance
+if ($.fn.DataTable.isDataTable('#data-table')) {
+    $('#data-table').DataTable().destroy();
+}
+
+// Initialize DataTable with the new configuration
+var dataTable = $('#data-table').DataTable({
+    "paging": true,
+    "pageLength": 10,
+    "responsive": true, // Enable responsive mode
+    // Other configuration options...
+});
+
+          }
         </script>  
         @include('partials._script')
-        <script>
-          $(document).ready(function(){
-            $('#reportTable').DataTable();
-          });
-        </script>  

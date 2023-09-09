@@ -15,7 +15,7 @@
                    <h4 class="card-title">System Logs</h4>
                  </div>
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="data-table">
                       <thead>
                         <tr>
                           <th> Module Name </th>
@@ -58,5 +58,9 @@
           </div>
         </div>
         @include('partials._footer')
-        
+        <script>
+          $(document).ready(function(){
+            $('#data-table').DataTable();
+          });
+        </script>  
         @include('partials._script')
