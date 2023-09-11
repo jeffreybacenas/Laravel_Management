@@ -12,7 +12,23 @@
                 <div class="card-body">
                   
                 <div class="card-body">
-                  <h4 class="card-title">Reports</h4>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="card-title">Reports</h4>
+                    <div>
+                    <a href="{{ route ('reports.excel') }}" class="btn btn-primary">
+                      <span style="display: inline-block; vertical-align: middle;">
+                        <i class="mdi mdi-export"></i>
+                      </span>
+                      <span style="display: inline-block; vertical-align: middle; margin-left: 5px;">Export to Excel</span>
+                    </a>
+                    <a class="btn btn-primary">
+                      <span style="display: inline-block; vertical-align: middle;">
+                        <i class="mdi mdi-file-pdf"></i>
+                      </span>
+                      <span style="display: inline-block; vertical-align: middle; margin-left: 5px;">Export to PDF</span>
+                    </a>
+                  </div>
+                  </div><br><br>
                   <div class="form-group d-flex justify-content-between align-items-center">
                       <select id="data-source" name="reportType" class="form-control">
                           <option value="">Select a report</option>
