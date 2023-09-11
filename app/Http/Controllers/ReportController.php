@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Services\ExportExcel;
 use Illuminate\Http\Request;
 use App\Services\SaveLogs;
 use App\Models\SystemLog;
@@ -154,5 +156,6 @@ class ReportController extends Controller
 
     public function excel()
     {
+        return Excel::download(new ExportExcel, 'data.xlsx');
     }
 }
